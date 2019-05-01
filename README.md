@@ -17,7 +17,7 @@ List of features :
 * Jekyll collection for portfolio
 * Serverless search using javascript
 * Minimalistic Error 404 page
-* A solid [guide](http://shikherverma.com/blog/Yet-Another-Jekyll-Blog) on how to customize or remove individual features.
+* A [guide](http://shikherverma.com/blog/Yet-Another-Jekyll-Blog) on how to customize or remove individual features.
 
 ## Usage
 
@@ -31,7 +31,7 @@ List of features :
 
 Have a question about this template ?  
 Or want to report a bug or an issue with this template?  
-[Open a new issue](https://github.com/ShikherVerma/shikherverma.github.io/issues) here on GitHub
+[Open a new issue](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/issues) here on GitHub
 
 ## Copyright and License
 
