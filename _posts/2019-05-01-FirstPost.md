@@ -9,3 +9,4 @@ comments: true
 tags: [ java ]
 ---
 
+This is my first blog post, for now just some text. More coming soon ...
