@@ -3,7 +3,7 @@ layout:     post
 title:      "Yet Another Jekyll Blog"
 subtitle:   "The Birth of yet another jekyll blog, which would be soon lost in oblivion."
 date:       2016-03-27 17:00:00
-author:     "Shikher Verma"
+author:     "Vipin Sharma"
 header-img: "img/posts/jekyll-bg.jpg"
 comments: true
 tags: [ CodeMonkey ]
