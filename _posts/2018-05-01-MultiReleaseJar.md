@@ -6,7 +6,7 @@ date:       2017-10-28 12:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/jekyll-bg.jpg"
 comments: true
-tags: [ java ]
+tags: java
 ---
 
 **In this post I would like to explain how to build multi release jar. To provide brief overview of this: It is new feature introduced in jdk9 [JEP-238](http://openjdk.java.net/jeps/238), now you can have 2 versions of class files and can control which version should be picked up for which jdk version.**
