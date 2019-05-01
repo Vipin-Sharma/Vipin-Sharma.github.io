@@ -10,7 +10,7 @@ google_analytics: UA-139438802-1
 disqus_url: vipinsharma85@gmail.com
 disqus_id: vipinsharma85
 # register on feedburner and replace this url. Deleting the value will remove it from footer.
-feedburner_url: https://feedburner.google.com/fb/a/mailverify?uri=programmer-wannabe&amp;loc=en_US
+feedburner_url: http://feeds.feedburner.com/github/DRpm
 
 # footer details. Deleting the value would remove it from footer.
 github_username:  Vipin-Sharma
