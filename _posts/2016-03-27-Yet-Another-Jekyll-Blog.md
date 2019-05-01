@@ -80,7 +80,7 @@ Scroll down to see the steps involved, but here is a 40-second video just as a r
 
 ![Installation steps](/img/posts/install-steps.gif)
 
-1. Fork the theme on github : Fork this website by going to the [github page of this project](https://github.com/shikherverma/shikherverma.github.io/) and click the *Fork* button on the top right corner. Forking means that you now copied this whole project and all the files into your account.
+1. Fork the theme on github : Fork this website by going to the [github page of this project](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/) and click the *Fork* button on the top right corner. Forking means that you now copied this whole project and all the files into your account.
 2. Change the project name in settings : This will create a GitHub User page ready with the *CleanBlogEnhanced* template that will be available at `http://<yourusername>.github.io` within a couple minutes.  To do this, click on *Settings* at the top (the cog icon) and there you'll have an option to rename.
 
 3. Change data : Edit the `_config.yml` file to change all the settings to reflect your site. To edit the file, click on it and then click on the pencil icon (watch the video tutorial above if you're confused).  The settings in the file are fairly self-explanatory and I added comments inside the file to help you further. Any line that begins with a pound sign (`#`) is a comment, and the rest of the lines are actual settings.
@@ -92,21 +92,21 @@ You can now visit your shiny new website, which will be seeded with several samp
 
 <a name="newpage"></a>**3. Add a new page**
 
-To add pages to your site, you can either write a markdown file (`.md`) or you can write an HTML file directly.  It is much easier to write markdown than HTML, so I suggest you do that (use the [tutorial I mentioned above](http://markdowntutorial.com/) if you need to learn markdown). You can look at some files on this site to get an idea of how to write markdown. To look at existing files, click on any file that ends in `.md`, for example [`this blog post`](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/_posts/2016-03-27-Yet-Another-Jekyll-Blog.md). On the next page you can see some nicely formatted text (there is a word in bold, a link, bullet points), and if you click on the pencil icon to edit the file, you will see the markdown that generated the pretty text. Very easy!  
-In contrast, look at [`index.html`](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/index.html). That's how your write HTML - not as pretty. So stick with markdown if you don't know HTML.
+To add pages to your site, you can either write a markdown file (`.md`) or you can write an HTML file directly.  It is much easier to write markdown than HTML, so I suggest you do that (use the [tutorial I mentioned above](http://markdowntutorial.com/) if you need to learn markdown). You can look at some files on this site to get an idea of how to write markdown. To look at existing files, click on any file that ends in `.md`, for example [`this blog post`](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/_posts/2016-03-27-Yet-Another-Jekyll-Blog.md). On the next page you can see some nicely formatted text (there is a word in bold, a link, bullet points), and if you click on the pencil icon to edit the file, you will see the markdown that generated the pretty text. Very easy!  
+In contrast, look at [`index.html`](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/index.html). That's how your write HTML - not as pretty. So stick with markdown if you don't know HTML.
 
-If you want to show this page in the top navigation bar of the website you have to edit [_includes/nav.html](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/_includes/nav.html). Just add an entry similar to the one present for blog or resume pointing to your new page or folder.
+If you want to show this page in the top navigation bar of the website you have to edit [_includes/nav.html](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/_includes/nav.html). Just add an entry similar to the one present for blog or resume pointing to your new page or folder.
 
 ```
 <li>
     <a href="/blog/">blog</a>
 </li>
 ```
-If you don't want the URL to end with `.html` you can create a folder with the desired name and place an `index.html` in it. Similar to what I have done for [blog](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/blog/).
+If you don't want the URL to end with `.html` you can create a folder with the desired name and place an `index.html` in it. Similar to what I have done for [blog](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/blog/).
 
 <a name="newpost"></a>**4. Add a new blog post**
 
-Any file that you add inside the [`_posts`](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/_posts) directory will be treated as a blog entry.  To publish a blog post add a file in `_post/` folder. Lets say `2016-03-27-Untitled-Post.md`. Notice that the file name contains today’s date and the title of your post. Jekyll requires posts to be named year-month-day-title.md. You can look at the existing files there to get an idea of how to write blog posts.  After you successfully add your own post, you can delete the existing files inside [`_posts`](https://github.com/ShikherVerma/Shikherverma.github.io/blob/master/_posts) to remove the sample posts, as those are just demo posts to help you learn.
+Any file that you add inside the [`_posts`](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/_posts) directory will be treated as a blog entry.  To publish a blog post add a file in `_post/` folder. Lets say `2016-03-27-Untitled-Post.md`. Notice that the file name contains today’s date and the title of your post. Jekyll requires posts to be named year-month-day-title.md. You can look at the existing files there to get an idea of how to write blog posts.  After you successfully add your own post, you can delete the existing files inside [`_posts`](https://github.com/Vipin-Sharma/Vipin-Sharma.github.io/blob/master/_posts) to remove the sample posts, as those are just demo posts to help you learn.
 
  As mentioned previously, you can use [prose.io](http://prose.io/) to add or edit files instead of doing it directly on GitHub, it can be a little easier that way.
 

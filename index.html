@@ -2,7 +2,7 @@
 layout: page
 title : Vipin Sharma
 header-img: "img/home-bg.jpg"
-description: "Programmer Wannabe"
+description: "Programmer"
 ---
 
 <!-- About Content -->
@@ -40,49 +40,6 @@ description: "Programmer Wannabe"
 				</div>
 				<img src="{{ item.image }}" class="img-responsive" alt="">
 			</a>
-		</div>
-		{% endfor %}
-	</section>
-
-	<!-- Portfolio Modals -->
-	<section id="portfolio modals">
-		{% for item in site.portfolio %}
-		<div class="portfolio-modal modal fade" id="{{ item.anchor }}" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-content">
-				<div class="close-modal" data-dismiss="modal">
-					<div class="lr">
-						<div class="rl">
-						</div>
-					</div>
-				</div>
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-8 col-lg-offset-2">
-							<div class="modal-body">
-								<h2>{{ item.title }}</h2>
-								<hr class="star-primary">
-								<img src="{{ item.image }}" class="img-responsive img-centered" alt="">
-								<p>{{ item.description }}</p>
-								<ul class="list-inline item-details">
-									<li>Team:
-										<strong>{{ item.team }}
-										</strong>
-									</li>
-									<li>Date:
-										<strong>{{ item.date | date: '%B %Y' }}
-										</strong>
-									</li>
-									<li>Category:
-										<strong>{{ item.category }}
-										</strong>
-									</li>
-								</ul>
-								<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 		{% endfor %}
 	</section>
