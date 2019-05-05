@@ -27,7 +27,7 @@ For summary of Switch Expression best place is [JEP-325](https://openjdk.java.ne
 > [preview language feature](https://openjdk.java.net/jeps/12).
 
 
-Some features to highlight here are:
+High level these are some important features switch expressions bring in:
 
  1. Multiple comma separated labels supported. 
  2. No fallthrough with the arrow (->) syntax
@@ -35,22 +35,22 @@ Some features to highlight here are:
     Enum there is compilation error.
     
 
-Before we start looking at Switch expression it is good recall what is basic java expression,as we read this post it will will help us to understand difference between switch expression and switch statement. 
-Java [expression](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html) is:
+Before we start looking at Switch expression it is good to recall what is basic Java [expression](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html) :
 
     a construct made up of variables, operators, and method invocations, which are constructed according to the syntax of the language, that evaluates to a single value.
 
 
-Before JDK 12 we had switch statement with colon (:) syntax, now JDK 12 introduced switch expression and arrow (->) syntax, that gives us 4 combinations of code we can write :
+Traditional switch statement had colon (:) syntax only, 
+now JDK 12 introduced switch expression and arrow (->) syntax, that gives us 4 ways to use switch :
 
- 1. Switch statement with colon syntax
- 2. Switch statement with arrow syntax 
- 3. Switch expression with arrow syntax
- 4. Switch expression with colon syntax
+ 1. Switch statement with colon syntax  (Traditional Switch statement)
+ 2. Switch statement with arrow syntax  (Java 12 Switch statement)
+ 3. Switch expression with arrow syntax (Java 12 Switch expression)
+ 4. Switch expression with colon syntax (Java 12 Switch expression)
 
 
-We will go through all above 4 cases and some additional ones as well, all java code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
-Here we are calculating yearly bonus percentage for all 4 combinations, same work in all 4 different ways.
+We will go through above 4 and few more cases in this post.
+Here we are calculating yearly bonus percentage using all of above four ways.
 For this we are using Employee class.
 
 ```java
@@ -62,7 +62,7 @@ public class Employee {
 }
 ```
 
-Below is way we are calling these functions.
+This is one of main function to call our method, rest are also similar. Complete Java code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples). 
 
 ```java
 public class SwitchStatementColonSyntax {
@@ -100,7 +100,9 @@ Now we will look at only method code dealing with switch statement/expression, r
 
 Important points to highlight in below code are:
 1.  This is typical example of Old Switch statement using break, works in older JDK versions as well.
-2.  We have a block scope variable temp.
+2.  If we forget to write break statement in any case, it falls through, goes to check next case and if nothing meets goes to default. which is not desired behaviour.
+    For better use see [example](https://github.com/Vipin-Sharma/JDK12Examples/blob/master/src/main/java/com/vip/jdk12/example/switchexpression/ExperimentSwitchJDK12.java), method name getYearlyBonusExperienceMatters_statement_arrowSyntax()         
+3.  We have a block scope variable temp, although the way we are using this doesnt make sense but this is added to show  possible syntax.
 
 ```java
 private static double getYearlyBonus_statement_colonSyntax(String designation) {
