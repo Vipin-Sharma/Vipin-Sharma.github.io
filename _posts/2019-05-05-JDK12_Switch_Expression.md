@@ -6,7 +6,7 @@ date:       2019-05-04 12:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/jekyll-bg.jpg"
 comments: true
-tags: java
+tags: [java, JDK12]
 ---
 
 
