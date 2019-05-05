@@ -94,7 +94,7 @@ public class SwitchStatementColonSyntax {
 }
 ```
 <br/><br/>
-Now we will look at only method code dealing with switch statement/expression, rest of the codes is same as above just method name we call is different and complete code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
+Now we will look at only method code dealing with switch statement/expression, rest of the code will be same as above just method name we call is different and complete code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
 
 ##### <ins>Switch statement with colon syntax</ins>
 
