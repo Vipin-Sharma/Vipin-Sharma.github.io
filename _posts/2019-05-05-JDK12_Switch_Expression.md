@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "JDK 12 Switch Expression"
+title:      "JDK 12 Switch Expressions"
 subtitle:   "JDK 12 introduced new features Switch expression with JEP 325"
 date:       2019-05-04 12:00:00
 author:     "Vipin Sharma"
@@ -10,7 +10,7 @@ tags: java
 ---
 
 
-JDK 12 Switch Expression:
+JDK 12 Switch Expressions:
 
 Switch expression was introduced recently with JDK12, it is in preview mode for now and JDK team is looking for [feedback](https://mail.openjdk.java.net/pipermail/jdk-dev/2019-April/002770.html) on this.  
 To use preview feature we need to pass --enable-preview parameter, sample command is:
