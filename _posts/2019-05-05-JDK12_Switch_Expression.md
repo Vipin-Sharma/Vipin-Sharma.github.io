@@ -27,7 +27,7 @@ For summary of Switch Expression best place is [JEP-325](https://openjdk.java.ne
 > [preview language feature](https://openjdk.java.net/jeps/12).
 
 
-Some features I would like to highlight here are:
+Some features to highlight here are:
 
  1. Multiple comma separated labels supported. 
  2. No fallthrough with the arrow (->) syntax
