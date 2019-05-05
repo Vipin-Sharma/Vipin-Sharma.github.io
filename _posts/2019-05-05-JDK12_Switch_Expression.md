@@ -35,7 +35,7 @@ High level these are some important features switch expressions bring in:
     Enum there is compilation error.
     
 
-Before we start looking at Switch expression it is good to recall what is basic Java [expression](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html) :
+Before we start looking at Switch expression it is good to recall what a basic Java [expression](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html) is:
 
     a construct made up of variables, operators, and method invocations, which are constructed according to the syntax of the language, that evaluates to a single value.
 
