@@ -4,7 +4,7 @@ title:      "Java Multi release jar"
 subtitle:   "JDK 9 introduced new features Multi release jar with JEP 238"
 date:       2017-10-28 12:00:00
 author:     "Vipin Sharma"
-header-img: "img/posts/jekyll-bg.jpg"
+header-img: "img/posts/blog-post-bg1.jpeg"
 comments: true
 tags: java
 ---

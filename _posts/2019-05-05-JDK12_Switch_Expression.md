@@ -4,7 +4,7 @@ title:      "JDK 12 Switch Expressions"
 subtitle:   "JDK 12 introduced new features Switch expression with JEP 325"
 date:       2019-05-04 12:00:00
 author:     "Vipin Sharma"
-header-img: "img/posts/jekyll-bg.jpg"
+header-img: "img/posts/blog-post-bg2.jpeg"
 comments: true
 tags: [java, JDK12]
 ---
