@@ -17,7 +17,7 @@ To use preview feature we need to pass --enable-preview parameter, sample comman
 
     /usr/lib/jvm/java-1.12.0-openjdk-amd64/bin/java --enable-preview com.vip.jdk12.example.ExperimentSwitchJDK12
 
-For summary of Switch Expression best place is [JEP-325](https://openjdk.java.net/jeps/325).
+For a summary of Switch Expression best place is [JEP-325](https://openjdk.java.net/jeps/325).
 > Extend the `switch` statement so that it can be used as either a
 > statement or an expression, and that both forms can use either a
 > "traditional" or "simplified" scoping and control flow behavior. These
@@ -41,7 +41,7 @@ Before we start looking at Switch expression it is good to recall what a basic J
 
 
 Traditional switch statement had colon (:) syntax only, now JDK 12 introduced switch expression and arrow (->) syntax.
-For explanation in this blog post, I have divided java switch statement/expression in 4 logical categories:
+For this blog post, I have divided java switch statement/expression into 4 logical categories:
 
  1. Switch statement with colon syntax  (Traditional Switch statement)
  2. Switch statement with arrow syntax  (Java 12 Switch statement)
@@ -49,9 +49,9 @@ For explanation in this blog post, I have divided java switch statement/expressi
  4. Switch expression with colon syntax (Java 12 Switch expression)
 
 
-In this blog post we will try to calculate yearly bonus percentage for Employee objects.
-We will do same exercise using all above 4 different ways. 
-Will cover some more cases at the end of this post.
+In this blog post, we will try to calculate the yearly bonus percentage for Employee objects.
+We will do the same exercise using all the above 4 different ways, 
+will cover some more cases at the end of this post.
 
 Employee class :
 
@@ -96,14 +96,14 @@ public class SwitchStatementColonSyntax {
 }
 ```
 <br/><br/>
-Now we will look at only method code dealing with switch statement/expression, rest of the code will be same as above just method name we call is different and complete code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
+Now we will look at only method code dealing with switch statement/expression, rest of the code will be same as the above just method name we call is different and complete code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
 
 ##### <ins>Switch statement with colon syntax</ins>
 
 Important points to highlight in below code are:
-1.  This is typical example of Old Switch statement using break, works in older JDK versions as well.
-2.  If we forget to write break statement in any case, it falls through, goes to check next case and if nothing meets goes to default, which may not be desired behaviour since this is result of human error.         
-3.  We have a block scope variable temp, although the way we are using this doesnt make sense but this is added to show  possible syntax.
+1.  This is the typical example of Old Switch statement using break, works in older JDK versions as well.
+2.  If we forget to write break statement in any case, it falls through, goes to check next case and if nothing meets goes to default, which may not be the desired behavior since this is the result of human error.         
+3.  We have a block scope variable temp, although the way we are using this doesn't make sense this is added to show  possible syntax.
 
 ```java
 private static double getYearlyBonus_statement_colonSyntax(String designation) {
@@ -135,15 +135,15 @@ private static double getYearlyBonus_statement_colonSyntax(String designation) {
 
 ##### <ins>Switch statement with arrow syntax</ins>
 
-In this section we are converting previous example into arrow syntax, with this it becomes fallthrough safe, see no use of break here.
+In this section we are converting the previous example into arrow syntax, with this it becomes fallthrough safe, see no use of break here.
 Even if we use break, my IDE shows this is redundant. 
-In this only change required is : replace : with ->, it is not some golden rule but for simplicity taken this example.
+In this only change required is: replace colon (:) with arrow (->), it is not some golden rule but for simplicity taken this example.
 
 Important points to notice are:
 1.  This is switch statement using arrow syntax, JDK12 specific.
-2.  Code right to arrow -> can be expression, a block, or a throw statement. Here we have taken example of block and Exception.
-3.  Block effectively provides scoping as well, we can define variable in block scope here temp is such example. temp use case may not make sense, it is just to show possibility of such syntax for better use see [example](https://github.com/Vipin-Sharma/JDK12Examples/blob/master/src/main/java/com/vip/jdk12/example/switchexpression/ExperimentSwitchJDK12.java), method name getYearlyBonusExperienceMatters_statement_arrowSyntax()
-4.  We can see use of Multi label in case "VP", "SeniorAssociate"
+2.  Code right to arrow -> can be expression, a block, or a throw statement. Here we have taken the example of block and Exception.
+3.  Block effectively provides scoping as well, we can define a variable in block scope here temp is such an example. temp use case may not make sense, it is just to show the possibility of such syntax for better use see [example](https://github.com/Vipin-Sharma/JDK12Examples/blob/master/src/main/java/com/vip/jdk12/example/switchexpression/ExperimentSwitchJDK12.java), method name getYearlyBonusExperienceMatters_statement_arrowSyntax()
+4.  We can see the use of Multi label in case "VP", "SeniorAssociate"
 5.  Arrow syntax makes it fallthrough safe, no break and no possibility of human error.
 
 
@@ -174,7 +174,7 @@ private static double getYearlyBonus_statement_arrowSyntax(String designation) {
 
 ##### <ins>Switch expression with arrow syntax</ins>
 
-Here we are changing previous example in switch expression with arrow syntax. From change perspective in this example 
+Here we are changing the previous example in switch expression with arrow syntax. From change perspective in this example 
 Switch expression evaluates to some value and we are saving it in bonus,
 We have removed block from case "MD" but that is just to show one more clean way to write this, it has nothing to do with arrow syntax.
 
@@ -186,9 +186,9 @@ important points to notice in this code are:
     In case "MD" -> 50.0 looks confusing for an expression you can write 50.0 + 0.0 it may make sense now.
     case "ED" has a block and case "Manager" has Exception. 
 4.  temp variable has no use it is just to show a block using temporary variable.
-5.  Repeating same benefit from previous section, using arrow syntax (->) we get assurance of no fallthrough.
-6.  Repeating same benefit from previous section, Multiple comma separated labels supported like here:   case "VP", "SeniorAssociate" -> 40;
-7.  case "ED" is using break, which is way to return value.
+5.  Repeating the same benefit from the previous section, using arrow syntax (->) we get the assurance of no fallthrough.
+6.  Repeating the same benefit from the previous section, Multiple comma separated labels supported like here:   case "VP", "SeniorAssociate" -> 40;
+7.  case "ED" is using break, which is a way to return value.
 
 
 ```java
@@ -206,7 +206,7 @@ private static double getYearlyBonus_expresion_arrowSyntax(String designation) {
     return bonus;
 }
 ```
-After removing temp variable this is one more variation of above code, this is just to add one more clean use case of switch.
+After removing temp variable this is one more variation of the above code, this is just to add one more clean use case of switch.
 ```java
 private static double getYearlyBonus_expresion_arrowSyntax(String designation) {
     double bonus = switch (designation) {
@@ -224,13 +224,13 @@ private static double getYearlyBonus_expresion_arrowSyntax(String designation) {
 
 ##### <ins>Switch expression with colon syntax</ins>
 
-To convert previous example in Switch expression with colon syntax we need to replace -> with colon 
+To convert the previous example in Switch expression with colon syntax we need to replace -> with colon 
 and add break where we want expression to return value.  
 
 important points to notice in this code are:
 
 1.  This is switch expression using colon syntax, JDK12 specific.
-2.  It has same advantages of switch expression, fallthrough safe and Multiple comma separated labels.
+2.  It has the same advantages of switch expression, fallthrough safe and Multiple comma separated labels.
 
 
 ```java
@@ -278,6 +278,6 @@ private static double getYearlyBonus_expression_arrow_enum(Designation designati
 }
 ```
 <br/><br/>
-##### At the end one more important point to be highlighted is :
-Arrow syntax doesnt always mean it is switch expression, similarly colon syntax doesnt always mean it is switch statement.  
+##### At the end one more important point to be highlighted is:
+Arrow syntax doesn't always mean it is switch expression, similarly colon syntax doesn't always mean it is switch statement.  
  
