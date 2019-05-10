@@ -12,7 +12,7 @@ tags: [java, JDK12]
 
 JDK 12 Switch Expressions:
 
-Switch expression was introduced recently with JDK12, it is in preview mode for now and JDK team is looking for [feedback](https://mail.openjdk.java.net/pipermail/jdk-dev/2019-April/002770.html) on this.  
+Switch expression was introduced recently with JDK12, it ~~is~~ was in preview mode till April 2019 and JDK team ~~is~~ was looking for [feedback](https://mail.openjdk.java.net/pipermail/jdk-dev/2019-April/002770.html) on this.  
 To use preview feature we need to pass --enable-preview parameter, sample command is:
 
     /usr/lib/jvm/java-1.12.0-openjdk-amd64/bin/java --enable-preview com.vip.jdk12.example.ExperimentSwitchJDK12
