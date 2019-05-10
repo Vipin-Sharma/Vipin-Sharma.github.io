@@ -41,7 +41,7 @@ Before we start looking at Switch expression it is good to recall what a basic J
 
 
 Traditional switch statement had colon (:) syntax only, now JDK 12 introduced switch expression and arrow (->) syntax.
-For this blog post, I have divided java switch statement/expression into 4 logical categories:
+For this blog post, I have divided the java switch statement/expression into 4 logical categories:
 
  1. Switch statement with colon syntax  (Traditional Switch statement)
  2. Switch statement with arrow syntax  (Java 12 Switch statement)
@@ -64,7 +64,7 @@ public class Employee {
 }
 ```
 
-This is one of main function to call our method, rest are also similar. Complete Java code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples). 
+This is one of the main function to call our method, rest are also similar. Complete Java code is available at [Github](https://github.com/Vipin-Sharma/JDK12Examples). 
 
 ```java
 public class SwitchStatementColonSyntax {
@@ -96,7 +96,7 @@ public class SwitchStatementColonSyntax {
 }
 ```
 <br/><br/>
-Now we will look at only method code dealing with switch statement/expression, rest of the code will be same as the above just method name we call is different and complete code is available at [github](https://github.com/Vipin-Sharma/JDK12Examples).
+Now we will look at only method code dealing with switch statement/expression, rest of the code will be same as the above just method name we call is different and complete code is available at [Github](https://github.com/Vipin-Sharma/JDK12Examples).
 
 ##### <ins>Switch statement with colon syntax</ins>
 
@@ -143,7 +143,7 @@ Important points to notice are:
 1.  This is switch statement using arrow syntax, JDK12 specific.
 2.  Code right to arrow -> can be expression, a block, or a throw statement. Here we have taken the example of block and Exception.
 3.  Block effectively provides scoping as well, we can define a variable in block scope here temp is such an example. temp use case may not make sense, it is just to show the possibility of such syntax for better use see [example](https://github.com/Vipin-Sharma/JDK12Examples/blob/master/src/main/java/com/vip/jdk12/example/switchexpression/ExperimentSwitchJDK12.java), method name getYearlyBonusExperienceMatters_statement_arrowSyntax()
-4.  We can see the use of Multi label in case "VP", "SeniorAssociate"
+4.  We can see the use of Multilabel in case "VP", "SeniorAssociate"
 5.  Arrow syntax makes it fallthrough safe, no break and no possibility of human error.
 
 
@@ -185,7 +185,7 @@ important points to notice in this code are:
 3.  Code right to arrow -> can be expression, a block, or a throw statement. All 3 cases are covered in this example.
     In case "MD" -> 50.0 looks confusing for an expression you can write 50.0 + 0.0 it may make sense now.
     case "ED" has a block and case "Manager" has Exception. 
-4.  temp variable has no use it is just to show a block using temporary variable.
+4.  temp variable has no use it is just to show a block using a temporary variable.
 5.  Repeating the same benefit from the previous section, using arrow syntax (->) we get the assurance of no fallthrough.
 6.  Repeating the same benefit from the previous section, Multiple comma separated labels supported like here:   case "VP", "SeniorAssociate" -> 40;
 7.  case "ED" is using break, which is a way to return value.
@@ -279,5 +279,5 @@ private static double getYearlyBonus_expression_arrow_enum(Designation designati
 ```
 <br/><br/>
 ##### At the end one more important point to be highlighted is:
-Arrow syntax doesn't always mean it is switch expression, similarly colon syntax doesn't always mean it is switch statement.  
+Arrow syntax doesn't always mean it is the switch expression similarly, colon syntax doesn't always mean it is the switch statement.  
  
