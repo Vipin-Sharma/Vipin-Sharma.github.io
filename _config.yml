@@ -6,7 +6,7 @@ description: "Vipin's Blog"  # used in site head
 # register on google analytics and replace this token
 google_analytics: UA-139438802-1
 # disque comments are broken if you send http:// along with url, this url is same as the one given on disqus
-# Deleting the value would remove it from footer.
+# Deleting the value would remove it from footer .
 disqus_url: vipinsharma85@gmail.com
 disqus_id: vipinsharma85
 # register on feedburner and replace this url. Deleting the value will remove it from footer.
