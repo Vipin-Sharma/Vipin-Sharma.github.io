@@ -1,7 +1,7 @@
 # Site settings
-title: Vipin's Blog
+title: Jfeatures
 default_author: Vipin Sharma
-description: "Vipin's Blog"  # used in site head
+description: "Jfeatures"  # used in site head
 
 # register on google analytics and replace this token
 google_analytics: UA-139438802-1
@@ -17,7 +17,7 @@ github_username:  Vipin-Sharma
 facebook_username:
 email: vipinsharma85@gmail.com
 stackoverflow_username: 2922515
-twitter_username : vipinbit85
+twitter_username : vipinbit
 linkedin_username : vipinsharma85
 keybase_username :
 copyright_name: Vipin Sharma

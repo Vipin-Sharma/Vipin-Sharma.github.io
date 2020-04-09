@@ -15,6 +15,7 @@ JDK 12 Switch Expressions:
 Switch expression was introduced recently with JDK12, it ~~is~~ was in preview mode till April 2019 and JDK team ~~is~~ was looking for [feedback](https://mail.openjdk.java.net/pipermail/jdk-dev/2019-April/002770.html) on this.  
 To use preview feature we need to pass --enable-preview parameter, sample command is:
 
+    /usr/lib/jvm/java-1.12.0-openjdk-amd64/bin/javac --enable-preview -source 12 com/vip/jdk12/example/ExperimentSwitchJDK12.java
     /usr/lib/jvm/java-1.12.0-openjdk-amd64/bin/java --enable-preview com.vip.jdk12.example.ExperimentSwitchJDK12
 
 For a summary of Switch Expression best place is [JEP-325](https://openjdk.java.net/jeps/325).
@@ -280,4 +281,6 @@ private static double getYearlyBonus_expression_arrow_enum(Designation designati
 <br/><br/>
 ##### At the end one more important point to be highlighted is:
 Arrow syntax doesn't always mean it is the switch expression similarly, colon syntax doesn't always mean it is the switch statement.  
- 
+
+<br/>
+Thanks [Anilesh](https://www.linkedin.com/in/anilesh-jain-80034517) for reviewing this post !
