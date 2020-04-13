@@ -2,7 +2,7 @@
 layout:     post
 title:      "How to start contribution in OpenJDK"
 subtitle:   "How to start contribution in OpenJDK "
-date:       2021-04-11 01:00:00
+date:       2020-04-11 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/OpenJDK_SS.jpeg"
 comments: true
@@ -10,23 +10,33 @@ tags: [java, OpenJDK]
 ---
 
 ## How to start contribution in OpenJDK
+(***This is initial draft for post***)
 
-First link to read: https://openjdk.java.net/contribute/ 
-In this "Become a Contributor" is step0, get OCA signed. 
-Although page says it takes 2 weeks, but for me it was fast, I did some mistake in form and oracle team helped me there submitting it again. 
+First link to read should be: https://openjdk.java.net/contribute/
+
+In this step0 is get OCA signed.
+
+Although page says it takes 2 weeks, but for me it was fast, I did some mistake in form and oracle team helped me there submitting it again.
 It might take couple of days time, meanwhile you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-Follow this link to prepare your development env
-https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html#tldr-instructions-for-the-impatient
+Popular link you might find on google to prepare env is from jdk11 specific branch:
 
+https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
+
+This is link for latest JDK branch:
+
+https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html
+
+<br>
+From above link Instructions for the Impatient are:
 
 1. Get the complete source code:
 hg clone http://hg.openjdk.java.net/jdk/jdk
 
 2. Run configure:
     bash configure
-    
+
       If configure fails due to missing dependencies (to either the toolchain, build tools, external libraries or the boot JDK), most of the time it prints a suggestion on how to resolve the situation on your platform. Follow the instructions, and try running bash configure again.
 
 3. Run make:
@@ -40,18 +50,17 @@ make run-test-tier1
 
 
 In case you stuck anywhere in above steps, most probably you can find solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
-And it  is ok to get stuck when you do this first time, as it needs some libraries etc. 
+And it  is ok to get stuck when you do this first time, as it needs some libraries etc.
 
-2 Problems I faced are:
+**2 Problems I faced are:**
 
-    1.  First time when I run configure command, it failed due to some external libraries missing.
+    1.  First time when I executed configure command, it failed due to some external libraries missing.
 
-    <!-- todo That reminds me, one of the place library name had problem in Small/Upper case, I should submit patch for that. -->
-
-    2.  I got failure while running tests:
+    2.  Got failure while running tests.
 
 
-For problem 1, got message console saying install set of libraries and it worked after that.
+**For problem 1**, got message on console saying install set of libraries and it worked after installing those.
+
 Initially I tried below, it failed due to case mismatch, it should have been libx11-dev not libX11-dev:
 
 ```
@@ -65,7 +74,7 @@ sudo apt-get install libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
 ```
 
 
-For problem 2, found below on the same page:
+**For problem 2**, found below on the same page:
 
 "Most of the JDK tests are using the JTReg test framework. Make sure that your configuration knows where to find your installation of JTReg. If this is not picked up automatically, use the --with-jtreg=<path to jtreg home> option to point to the JTReg framework. Note that this option should point to the JTReg home, i.e. the top directory, containing lib/jtreg.jar etc."
 
@@ -105,17 +114,17 @@ TEST SUCCESS
 ```
 
 After this you may want to setup jdk project in IDE. I use Intellij and we have a shell script idea.sh comes along with jdk to setup project for you. I wanted to setup java.base only so my command was:
-idea.sh java.base
+```idea.sh java.base```
 
 In case you want to setup all modules then just run idea.sh.
 
-Once you identify what you would contribute and then you need to prepare patch using webrev.sh
+Once you identify what you would contribute and then you need to prepare patch using [webrev.sh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
-Sample command is:
+After copying webrev.sh in my jdk directory and executed this command:
 
-<!-- todo write command-->
+```ksh ./webrev.sh```
 
-After creating patch you need to create bug id, send email to corresponding email list (add email list link). Initially someone should sponsor your fix and create bug Id on your behalf.
+After creating patch you need bug id so to submit patch against, send email to corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially someone should sponsor your fix and create bug Id on your behalf.
 
 Once you have bug id, submit review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
 
@@ -126,9 +135,13 @@ You can not attach anything and send to email list, if this is small patch then 
 
 ### Resources:    
 
-1.
+1. https://openjdk.java.net/guide/index.html
+2. https://hg.openjdk.java.net/jdk/jdk/
+3. https://openjdk.java.net/contribute/
+4. https://openjdk.java.net/bylaws#_7
+5. https://www.youtube.com/watch?v=dzm4EqLuuNQ video from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
 
 <br>
 
 ### At the end : --
-To learn more Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
+To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
