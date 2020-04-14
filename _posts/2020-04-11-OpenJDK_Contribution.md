@@ -14,17 +14,17 @@ tags: [java, OpenJDK]
 
 First link to read should be: https://openjdk.java.net/contribute/
 
-In this step0 is get OCA signed.
+In this step 0 is get OCA signed.
 
-Although page says it takes 2 weeks, but for me it was fast, I did some mistake in form and oracle team helped me there submitting it again.
+Although page says it takes 2 weeks, but for me it was fast, I did some mistake in form and oracle team helped me to submit it again.
 It might take couple of days time, meanwhile you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-Popular link you might find on google to prepare env is from jdk11 specific branch:
+Popular link you might find on google search to prepare env is from jdk11 specific branch:
 
 https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
 
-This is link for latest JDK branch:
+Following is link for latest JDK branch:
 
 https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html
 
@@ -50,13 +50,13 @@ make run-test-tier1
 
 
 In case you stuck anywhere in above steps, most probably you can find solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
-And it  is ok to get stuck when you do this first time, as it needs some libraries etc.
+And it is ok to get stuck when you setup this first time, as it needs some libraries etc.
 
 **2 Problems I faced are:**
 
-    1.  First time when I executed configure command, it failed due to some external libraries missing.
+    1.  Failure in configure command, it failed due to some external libraries missing.
 
-    2.  Got failure while running tests.
+    2.  Failure while running tests.
 
 
 **For problem 1**, got message on console saying install set of libraries and it worked after installing those.
@@ -113,18 +113,25 @@ Test summary
 TEST SUCCESS
 ```
 
+<br>
+
+### Setting up project in IDE
+
 After this you may want to setup jdk project in IDE. I use Intellij and we have a shell script idea.sh comes along with jdk to setup project for you. I wanted to setup java.base only so my command was:
 ```idea.sh java.base```
 
 In case you want to setup all modules then just run idea.sh.
 
+<br>
+
+### Preparing patch
 Once you identify what you would contribute and then you need to prepare patch using [webrev.sh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
-After copying webrev.sh in my jdk directory and executed this command:
+After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in same directory.
 
 ```ksh ./webrev.sh```
 
-After creating patch you need bug id so to submit patch against, send email to corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially someone should sponsor your fix and create bug Id on your behalf.
+After creating patch you need bug id to submit patch against that bug, send email to corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially someone should sponsor your fix and create bug Id on your behalf.
 
 Once you have bug id, submit review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
 
@@ -139,7 +146,8 @@ You can not attach anything and send to email list, if this is small patch then 
 2. https://hg.openjdk.java.net/jdk/jdk/
 3. https://openjdk.java.net/contribute/
 4. https://openjdk.java.net/bylaws#_7
-5. https://www.youtube.com/watch?v=dzm4EqLuuNQ video from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
+5. https://adoptopenjdk.gitbooks.io/adoptopenjdk-getting-started-kit/content/en/
+6. https://www.youtube.com/watch?v=dzm4EqLuuNQ video from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
 
 <br>
 
