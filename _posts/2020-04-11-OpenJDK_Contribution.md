@@ -140,7 +140,7 @@ RFR 8240524: Removed warnings from test classes
 
 You can not attach anything and send to email list, if this is small patch then you can add patch text in email or talk to sponsor how do they want to accept it.
 
-### 2 important things I learned in initial commits are:
+### 2 important things I learned in initial commits
 1. Update copyright year in files, there can be 2 formats for year in files, it should be updated as following:
 ```
  Copyright (c) 1999       ---> Copyright (c) 1999, 2020
