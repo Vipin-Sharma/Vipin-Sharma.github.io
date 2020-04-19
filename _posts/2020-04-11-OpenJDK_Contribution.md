@@ -20,11 +20,11 @@ Although page says it takes 2 weeks, but for me it was fast, I did some mistake 
 It might take couple of days time, meanwhile you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-Popular link you might find on google search to prepare env is from jdk11 specific branch:
+Popular link you might find on google search to prepare env is from JDK11 specific branch:
 
 https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
 
-Following is link for latest JDK branch:
+Following is link from latest JDK branch:
 
 https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html
 
@@ -140,7 +140,16 @@ RFR 8240524: Removed warnings from test classes
 
 You can not attach anything and send to email list, if this is small patch then you can add patch text in email or talk to sponsor how do they want to accept it.
 
-### Resources:    
+### Few important things to note:
+1. Update copyright year in files, there can be 2 formats for year in files, it should be updated as following:
+```
+ Copyright (c) 1999       ---> Copyright (c) 1999, 2020
+ Copyright (c) 1999, 2016 ---> Copyright (c) 1999, 2020
+```
+2. A significant portion of code in package jdk.internal.icu comes from an upstream project, ICU4J. Changes in these packages should be done at [upstream](https://github.com/unicode-org/icu/tree/master/icu4j).
+
+
+### Resources:
 
 1. https://openjdk.java.net/guide/index.html
 2. https://hg.openjdk.java.net/jdk/jdk/
