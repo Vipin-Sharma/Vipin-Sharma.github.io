@@ -140,7 +140,7 @@ RFR 8240524: Removed warnings from test classes
 
 You can not attach anything and send to email list, if this is small patch then you can add patch text in email or talk to sponsor how do they want to accept it.
 
-### 2 important things I learned in initial commits
+### Two important things I learned in initial commits
 1. Update copyright year in files, there can be 2 formats for year in files, it should be updated as following:
 ```
  Copyright (c) 1999       ---> Copyright (c) 1999, 2020
@@ -149,7 +149,7 @@ You can not attach anything and send to email list, if this is small patch then 
 2. A significant portion of code in package jdk.internal.icu comes from an upstream project, ICU4J. Changes in these packages should be done at [upstream](https://github.com/unicode-org/icu/tree/master/icu4j).
 
 
-### Resources:
+### Resources
 
 1. https://openjdk.java.net/guide/index.html
 2. https://hg.openjdk.java.net/jdk/jdk/
@@ -160,5 +160,5 @@ You can not attach anything and send to email list, if this is small patch then 
 
 <br>
 
-### At the end : --
+### At the end
 To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
