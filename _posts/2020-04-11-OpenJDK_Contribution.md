@@ -8,6 +8,16 @@ header-img: "img/posts/OpenJDK_SS.jpeg"
 comments: true
 tags: [java, OpenJDK]
 ---
+<!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
+  - [How to start contribution in OpenJDK](#how-to-start-contribution-in-openjdk)
+    - [Prepare your development env](#prepare-your-development-env)
+    - [Setting up the project in IDE](#setting-up-the-project-in-ide)
+    - [Preparing patch](#preparing-patch)
+    - [Two important things I learned in initial commits](#two-important-things-i-learned-in-initial-commits)
+    - [Resources](#resources)
+    - [At the end](#at-the-end)
+<!-- TOC END -->
+
 
 ## How to start contribution in OpenJDK
 (***This is initial draft for post***)
@@ -118,9 +128,11 @@ TEST SUCCESS
 ### Setting up the project in IDE
 
 After this, you may want to setup JDK project in IDE. I use IntelliJ and we have a shell script idea.sh comes along with jdk to setup a project for you. I wanted to setup module java.base only so my command was:
-```idea.sh java.base```
+```
+idea.sh java.base
+```
 
-In case you want to set up all modules then just run idea.sh.
+In case you want to set up all modules then just run ```idea.sh```.
 
 <br>
 
@@ -129,7 +141,9 @@ Once you identify what you would contribute and then you need to prepare patch u
 
 After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in the same directory.
 
-```ksh ./webrev.sh```
+```
+ksh ./webrev.sh
+```
 
 After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug Id on your behalf.
 
