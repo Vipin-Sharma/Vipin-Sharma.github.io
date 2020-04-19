@@ -12,19 +12,19 @@ tags: [java, OpenJDK]
 ## How to start contribution in OpenJDK
 (***This is initial draft for post***)
 
-First link to read should be: https://openjdk.java.net/contribute/
+The first link to read should be: https://openjdk.java.net/contribute/
 
 In this step 0 is get OCA signed.
 
-Although page says it takes 2 weeks, but for me it was fast, I did some mistake in form and oracle team helped me to submit it again.
-It might take couple of days time, meanwhile you can prepare your development env ready for contribution.
+Although the page says it takes 2 weeks, for me it was fast, I did some mistake in form and the oracle team helped me to submit it again.
+It might take a couple of days' time, meanwhile, you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-Popular link you might find on google search to prepare env is from JDK11 specific branch:
+The popular link you might find on google search to prepare env is from JDK11 specific branch:
 
 https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
 
-Following is link from latest JDK branch:
+Following is the link from latest JDK branch:
 
 https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html
 
@@ -49,8 +49,8 @@ hg clone http://hg.openjdk.java.net/jdk/jdk
 make run-test-tier1
 
 
-In case you stuck anywhere in above steps, most probably you can find solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
-And it is ok to get stuck when you setup this first time, as it needs some libraries etc.
+In case you stuck anywhere in the above steps, most probably you can find a solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
+And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
 
 **2 Problems I faced are:**
 
@@ -59,15 +59,15 @@ And it is ok to get stuck when you setup this first time, as it needs some libra
     2.  Failure while running tests.
 
 
-**For problem 1**, got message on console saying install set of libraries and it worked after installing those.
+**For problem 1**, got a message on console saying install set of libraries and it worked after installing those.
 
-Initially I tried below, it failed due to case mismatch, it should have been libx11-dev not libX11-dev:
+Initially, I tried below, it failed due to case mismatch, it should have been libx11-dev not libX11-dev:
 
 ```
 sudo apt-get install libX11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
 ```
 
-This one worked !
+This one worked!
 
 ```
 sudo apt-get install libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
@@ -81,7 +81,7 @@ sudo apt-get install libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
 I have jtreg source code as well so in my case this option was something like this:
 --with-jtreg=/home/vipin/IdeaProjects/jtreg/build/images/jtreg
 
-Once your setup is successful and you execute tests, result will be something like this:
+Once your setup is successful and you execute tests, the result will be something like this:
 
 At end of test you will see below output:
 
@@ -115,33 +115,33 @@ TEST SUCCESS
 
 <br>
 
-### Setting up project in IDE
+### Setting up the project in IDE
 
-After this you may want to setup jdk project in IDE. I use Intellij and we have a shell script idea.sh comes along with jdk to setup project for you. I wanted to setup java.base only so my command was:
+After this, you may want to setup JDK project in IDE. I use IntelliJ and we have a shell script idea.sh comes along with jdk to setup a project for you. I wanted to setup module java.base only so my command was:
 ```idea.sh java.base```
 
-In case you want to setup all modules then just run idea.sh.
+In case you want to set up all modules then just run idea.sh.
 
 <br>
 
 ### Preparing patch
 Once you identify what you would contribute and then you need to prepare patch using [webrev.sh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
-After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in same directory.
+After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in the same directory.
 
 ```ksh ./webrev.sh```
 
-After creating patch you need bug id to submit patch against that bug, send email to corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially someone should sponsor your fix and create bug Id on your behalf.
+After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug Id on your behalf.
 
-Once you have bug id, submit review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
+Once you have bug id, submit a review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
 
 e.g.
 RFR 8240524: Removed warnings from test classes
 
-You can not attach anything and send to email list, if this is small patch then you can add patch text in email or talk to sponsor how do they want to accept it.
+You can not attach anything and send to the email list. If this is a small patch then you can add patch text in an email or talk to sponsor how do they want to accept it.
 
 ### Two important things I learned in initial commits
-1. Update copyright year in files, there can be 2 formats for year in files, it should be updated as following:
+1. Update copyright year in files, there can be 2 formats for the year in files, it should be updated as follows:
 ```
  Copyright (c) 1999       ---> Copyright (c) 1999, 2020
  Copyright (c) 1999, 2016 ---> Copyright (c) 1999, 2020
