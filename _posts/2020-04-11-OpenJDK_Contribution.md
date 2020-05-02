@@ -12,6 +12,7 @@ tags: [java, OpenJDK]
   - [How to start contribution in OpenJDK](#how-to-start-contribution-in-openjdk)
     - [Prepare your development env](#prepare-your-development-env)
     - [Setting up the project in IDE](#setting-up-the-project-in-ide)
+    - [Testing your change using JTREG](#testing-your-change-using-jtreg)
     - [Preparing patch](#preparing-patch)
     - [Two important things I learned in initial commits](#two-important-things-i-learned-in-initial-commits)
     - [Resources](#resources)
@@ -135,6 +136,47 @@ idea.sh java.base
 In case you want to set up all modules then just run ```idea.sh```.
 
 <br>
+
+### Testing your change using [JTREG](https://openjdk.java.net/jtreg/index.html)
+
+Two ways you can run JTREG tests, command line and GUI.
+
+**Using command line**
+
+Following command will run all the tests in the test/jdk/java/lang/Appendable/ and its sub-folders.
+```
+/home/vipin/IdeaProjects/newjdk/jdk$ /home/vipin/IdeaProjects/jtreg/build/images/jtreg/lib/jtreg.jar -jdk:/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk/  test/jdk/java/lang/Appendable/
+```
+
+Following command is running individual test Basic.java
+```
+/home/vipin/IdeaProjects/jtreg/build/images/jtreg/lib/jtreg.jar -jdk:/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk/  test/jdk/java/lang/Appendable/Basic.java
+```
+
+
+**JTREG GUI**
+
+```
+export JT_JAVA=/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk
+vipin:/home/vipin/IdeaProjects/newjdk/jdk$ /home/vipin/IdeaProjects/jtreg/build/images/jtreg/bin/jtreg -g -jdk:$JT_JAVA -agentvm -automatic -verbose:summary -exclude:./test/jdk/ProblemList.txt test/jdk/
+```
+Following is JTREG GUI on my system
+
+![JTREG GUI](../img/posts/jtreg.jpg)
+
+
+In above command test/jdk/ dir has TEST.ROOT file, below dirs have TEST.ROOT
+
+```
+vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
+./test/lib-test/TEST.ROOT
+./test/jaxp/TEST.ROOT
+./test/langtools/TEST.ROOT
+./test/failure_handler/test/TEST.ROOT
+./test/jdk/TEST.ROOT
+./test/hotspot/jtreg/TEST.ROOT
+./make/langtools/test/TEST.ROOT
+```
 
 ### Preparing patch
 Once you identify what you would contribute and then you need to prepare patch using [webrev.sh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
