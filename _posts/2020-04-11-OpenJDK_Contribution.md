@@ -179,12 +179,12 @@ vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
 ```
 
 ### Preparing patch
-Once you identify what you would contribute and then you need to prepare patch using [webrev.sh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
+Once you identify what you would contribute and then you need to prepare patch using [webrev.ksh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
 After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in the same directory.
 
 ```
-ksh ./webrev.sh
+ksh ./webrev.ksh
 ```
 
 After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug Id on your behalf.
