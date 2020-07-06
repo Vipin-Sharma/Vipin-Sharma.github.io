@@ -9,12 +9,9 @@ comments: true
 tags: [java, JDK14]
 ---
 
-(***This is initial draft for post, work in progress***)
 <!-- Attention -->
 ### Who has never received NullPointerException ?
 Every Java developer has encountered NullPointerExceptions, This is most common programming error professional Java Developers face.
-
-<!-- @todo: Add example of NullPointerException showing how we can not figure out root cause of NullPointerException. -->
 
 This is one simple programming mistake, I am trying to call method size on null list.
 
@@ -36,14 +33,17 @@ at com.vip.jdk14.NullPointerExceptionDemo.main(NullPointerExceptionDemo.java:8)
 Process finished with exit code 1
 ```
 
-In real life situation, every time we get NullPointerException we have to carefully analyze which variable was null.
-<!-- @todo Add example showing real life difficult to find example -->
+In above example it is clear list is null but several other situation it is not easy to understand root cause like shown below.
+
+```java
+    System.out.println(objectA.getObjectB().getObjectC().getObjectD());
+```
+Here if you get NullPointerException, when objectA or objectA.getObjectB() or objectA.getObjectB().getObjectC() any of them is null. And you get same NullPointerException in all these cases.
 
 <br>
 <!-- Interest -->
 ### Java 14 can show you root cause of NullPointerException
 
-<!-- @todo Show history/background of this feature, SAP JVM has this since 2006 -->
 Now Java 14 has added language feature to show root cause of NullPointerException.
 This language feature has been part of SAP commercial JVM since 2006.
 
@@ -51,7 +51,6 @@ This language feature has been part of SAP commercial JVM since 2006.
 <br>
 <!-- Desire -->
 ### Helpful NullPointerException
-<!-- @todo Show working program and how new language feature helps to find root casue. -->
 
 In Java 14 you can start passing -XX:+ShowCodeDetailsInExceptionMessages in VM arguments and it help you to see root cause of NullPointerException.
 Initially This option is disabled by default and in later releases this will be enabled by default.
@@ -64,7 +63,7 @@ public class HelpfulNullPointerExceptionDemo {
     }
 }
 ```
-Running this program prints following Exception message, and root cause is clear ***list is null***.
+Running this program prints following Exception message, and root cause is clearly written ***list is null***.
 
 ```
 Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because "list" is null
