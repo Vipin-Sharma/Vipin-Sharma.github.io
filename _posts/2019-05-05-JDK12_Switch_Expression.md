@@ -30,11 +30,11 @@ For a summary of Switch Expression best place is [JEP-325](https://openjdk.java.
 
 High level these are some important features switch expressions bring in:
 
- 1. Multiple comma separated labels supported. 
+ 1. Multiple comma separated labels supported.
  2. No fallthrough with the arrow (->) syntax
  3. Switch expressions are exhaustive for Enum, in case we miss some case for
     Enum there is compilation error.
-    
+
 
 Before we start looking at Switch expression it is good to recall what a basic Java [expression](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/expressions.html) is:
 
@@ -51,7 +51,7 @@ For this blog post, I have divided the java switch statement/expression into 4 l
 
 
 In this blog post, we will try to calculate the yearly bonus percentage for Employee objects.
-We will do the same exercise using all the above 4 different ways, 
+We will do the same exercise using all the above 4 different ways,
 will cover some more cases at the end of this post.
 
 Employee class :
@@ -65,7 +65,7 @@ public class Employee {
 }
 ```
 
-This is one of the main function to call our method, rest are also similar. Complete Java code is available at [Github](https://github.com/Vipin-Sharma/JDK12Examples). 
+This is one of the main function to call our method, rest are also similar. Complete Java code is available at [Github](https://github.com/Vipin-Sharma/JDK12Examples).
 
 ```java
 public class SwitchStatementColonSyntax {
@@ -137,7 +137,7 @@ private static double getYearlyBonus_statement_colonSyntax(String designation) {
 ##### <ins>Switch statement with arrow syntax</ins>
 
 In this section we are converting the previous example into arrow syntax, with this it becomes fallthrough safe, see no use of break here.
-Even if we use break, my IDE shows this is redundant. 
+Even if we use break, my IDE shows this is redundant.
 In this only change required is: replace colon (:) with arrow (->), it is not some golden rule but for simplicity taken this example.
 
 Important points to notice are:
@@ -169,13 +169,13 @@ private static double getYearlyBonus_statement_arrowSyntax(String designation) {
     }
     return bonus;
 }
-``` 
+```
 <br/><br/>
 
 
 ##### <ins>Switch expression with arrow syntax</ins>
 
-Here we are changing the previous example in switch expression with arrow syntax. From change perspective in this example 
+Here we are changing the previous example in switch expression with arrow syntax. From change perspective in this example
 Switch expression evaluates to some value and we are saving it in bonus,
 We have removed block from case "MD" but that is just to show one more clean way to write this, it has nothing to do with arrow syntax.
 
@@ -185,7 +185,7 @@ important points to notice in this code are:
 2.  Arrow (->) points to returned value.
 3.  Code right to arrow -> can be expression, a block, or a throw statement. All 3 cases are covered in this example.
     In case "MD" -> 50.0 looks confusing for an expression you can write 50.0 + 0.0 it may make sense now.
-    case "ED" has a block and case "Manager" has Exception. 
+    case "ED" has a block and case "Manager" has Exception.
 4.  temp variable has no use it is just to show a block using a temporary variable.
 5.  Repeating the same benefit from the previous section, using arrow syntax (->) we get the assurance of no fallthrough.
 6.  Repeating the same benefit from the previous section, Multiple comma separated labels supported like here:   case "VP", "SeniorAssociate" -> 40;
@@ -225,7 +225,7 @@ private static double getYearlyBonus_expresion_arrowSyntax(String designation) {
 
 ##### <ins>Switch expression with colon syntax</ins>
 
-To convert the previous example in Switch expression with colon syntax we need to replace -> with colon 
+To convert the previous example in Switch expression with colon syntax we need to replace -> with colon
 and add break where we want expression to return value.  
 
 important points to notice in this code are:
@@ -253,10 +253,10 @@ private static double getYearlyBonus_expresion_colonSyntax(String designation) {
 ```
 <br/><br/>
 
-##### Exhaustiveness 
+##### Exhaustiveness
 Switch expressions are exhaustive for Enum, in case we miss any case for Enum there is compilation error.
 
-This code has compilation error, saying "Switch expression does not cover all possible input values" 
+This code has compilation error, saying "Switch expression does not cover all possible input values"
 ```java
 private static double getYearlyBonus_expression_arrow_enum_compilationerror(Designation designation) {
     return switch(designation){
@@ -280,7 +280,11 @@ private static double getYearlyBonus_expression_arrow_enum(Designation designati
 ```
 <br/><br/>
 ##### At the end one more important point to be highlighted is:
-Arrow syntax doesn't always mean it is the switch expression similarly, colon syntax doesn't always mean it is the switch statement.  
+Arrow syntax doesn't always mean it is the switch expression similarly, colon syntax doesn't always mean it is the switch statement.
+
+Get your free copy of [5 steps to Best Java Jobs](https://jfeatures.com/)
+
+To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
 
 <br/>
 Thanks [Anilesh](https://www.linkedin.com/in/anilesh-jain-80034517) for reviewing this post !

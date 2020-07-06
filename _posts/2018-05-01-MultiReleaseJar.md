@@ -18,7 +18,7 @@ Created dir javacode, inside this java8 and java9. and both have A.java
 ```
 XXXX@XXX-MacBook-Air.local:~/javacode/java8/com/vipin/exp$ pwd
 /Users/XXXX/javacode/java8/com/vipin/exp
-XXXX@XXX-MacBook-Air.local:~/javacode/java8/com/vipin/exp$ cat A.java 
+XXXX@XXX-MacBook-Air.local:~/javacode/java8/com/vipin/exp$ cat A.java
 package com.vipin.exp;
 public class A{
     public static void main(String[] args){
@@ -28,7 +28,7 @@ public class A{
 ```
 
 ```
-XXXX@XXX-MacBook-Air.local:~/javacode/java9/com/vipin/exp$ cat A.java 
+XXXX@XXX-MacBook-Air.local:~/javacode/java9/com/vipin/exp$ cat A.java
 package com.vipin.exp;
 public class A{
     public static void main(String[] args){
@@ -84,7 +84,7 @@ XXXX@XXX-MacBook-Air.local:~/javacode$ tree
 ```
 XXXX@XXX-MacBook-Air.local:~/javacode$ jar -c -f vipin.jar -C java8 . --release 9 -C java9 .
 Warning: entry META-INF/versions/9/com/vipin/exp/A.java, multiple resources with same name
-XXXX@XXX-MacBook-Air.local:~/javacode$ jar -tvf vipin.jar 
+XXXX@XXX-MacBook-Air.local:~/javacode$ jar -tvf vipin.jar
      0 Wed Oct 18 19:06:26 IST 2017 META-INF/
     82 Wed Oct 18 19:06:26 IST 2017 META-INF/MANIFEST.MF
      0 Tue Oct 17 18:02:04 IST 2017 com/
@@ -102,7 +102,7 @@ XXXX@XXX-MacBook-Air.local:~/javacode$ jar -tvf vipin.jar
 
 
 **Now multi release jar is ready, lets see it if it works as expected.**
-   
+
 Running class A with jdk9:
 ```
 XXXX@XXX-MacBook-Air.local:~/javacode$ java -version
@@ -123,3 +123,8 @@ Inside java8 version
 ```
 
 With output it is clear, version of java class is executed as per jdk version!
+
+### At the end
+Get your free copy of [5 steps to Best Java Jobs](https://jfeatures.com/)
+
+To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).

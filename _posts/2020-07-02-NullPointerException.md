@@ -33,12 +33,12 @@ at com.vip.jdk14.NullPointerExceptionDemo.main(NullPointerExceptionDemo.java:8)
 Process finished with exit code 1
 ```
 
-In above example it is clear list is null but several other situation it is not easy to understand root cause like shown below.
+In above example it is clear list is null but several other situation it is not easy to understand root cause. See following example.
 
 ```java
     System.out.println(objectA.getObjectB().getObjectC().getObjectD());
 ```
-Here if you get NullPointerException, when objectA or objectA.getObjectB() or objectA.getObjectB().getObjectC() any of them is null. And you get same NullPointerException in all these cases.
+Here you may get NullPointerException, when ***objectA*** or ***objectA.getObjectB()*** or ***objectA.getObjectB().getObjectC()*** any of them is null. And you get same NullPointerException message in all these cases.
 
 <br>
 <!-- Interest -->
@@ -52,8 +52,8 @@ This language feature has been part of SAP commercial JVM since 2006.
 <!-- Desire -->
 ### Helpful NullPointerException
 
-In Java 14 you can start passing -XX:+ShowCodeDetailsInExceptionMessages in VM arguments and it help you to see root cause of NullPointerException.
-Initially This option is disabled by default and in later releases this will be enabled by default.
+In Java 14 you can start passing -XX:+ShowCodeDetailsInExceptionMessages in VM arguments and it helps you to see root cause of NullPointerException.
+In Java 14 option is disabled by default and in later releases this will be enabled by default.
 
 ```java
 public class HelpfulNullPointerExceptionDemo {
