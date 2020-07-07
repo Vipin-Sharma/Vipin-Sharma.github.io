@@ -1,7 +1,7 @@
 # Site settings
 title: Jfeatures
 default_author: Vipin Sharma
-description: "!! Blog for Java Language Features Jfeatures.com !!"  # used in site head
+description: "Learn Java Language Features"  # used in site head
 
 # register on google analytics and replace this token
 google_analytics: UA-139438802-1
