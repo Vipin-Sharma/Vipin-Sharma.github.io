@@ -217,6 +217,7 @@ You can not attach anything and send to the email list. If this is a small patch
 <br>
 
 ### At the end
-Get your free copy of [5 steps to Best Java Jobs](https://jfeatures.com/)
 
-To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
+To learn best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
+
+Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.

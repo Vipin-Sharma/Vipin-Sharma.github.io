@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Can NullPointerException be helpful ?"
+title:      "Can NullPointerException be helpful?"
 subtitle:   "NullPointerException "
 date:       2020-07-02 01:00:00
 author:     "Vipin Sharma"
@@ -11,7 +11,7 @@ tags: [java, JDK14]
 
 <!-- Attention -->
 ### Have you ever received NullPointerException ?
-Every Java developer has encountered NullPointerExceptions, This is most common programming error professional Java Developers face.
+Every Java developer has encountered NullPointerExceptions, this is most common programming error new Java Developers face.
 
 This is one simple programming mistake, I am trying to call method size on null list.
 
@@ -75,6 +75,7 @@ Process finished with exit code 1
 <br>
 <!-- Action -->
 ### At the end
-Get your free copy of [5 steps to Best Java Jobs](https://jfeatures.com/)
 
-To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
+To learn best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
+
+Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.

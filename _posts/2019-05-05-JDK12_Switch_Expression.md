@@ -282,9 +282,11 @@ private static double getYearlyBonus_expression_arrow_enum(Designation designati
 ##### At the end one more important point to be highlighted is:
 Arrow syntax doesn't always mean it is the switch expression similarly, colon syntax doesn't always mean it is the switch statement.
 
-Get your free copy of [5 steps to Best Java Jobs](https://jfeatures.com/)
+### At the end
 
-To learn Java language features you can join [mailing list](https://jfeatures.com/) and follow me on twitter [@vipinbit](https://twitter.com/vipinbit).
+To learn best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
+
+Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
 
 <br/>
 Thanks [Anilesh](https://www.linkedin.com/in/anilesh-jain-80034517) for reviewing this post !
