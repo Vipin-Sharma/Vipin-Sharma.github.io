@@ -13,7 +13,7 @@ tags: [java, JDK14]
 ### Have you ever received NullPointerException ?
 Every Java developer has encountered NullPointerExceptions, this is most common programming error new Java Developers face.
 
-This is one simple programming mistake, I am trying to call method size on null list.
+Following is one simple programming mistake, I am trying to call method size on null list.
 
 ```java
 public class NullPointerExceptionDemo {
@@ -45,7 +45,7 @@ Here you may get NullPointerException, when ***objectA*** or ***objectA.getObjec
 ### Java 14 can show you root cause of NullPointerException
 
 Now Java 14 has added language feature to show root cause of NullPointerException.
-This language feature has been part of SAP commercial JVM since 2006.
+This language feature has been part of [SAP](https://twitter.com/SweetSapMachine) commercial JVM since 2006.
 
 
 <br>
