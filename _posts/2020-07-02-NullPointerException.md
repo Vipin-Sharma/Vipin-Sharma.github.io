@@ -9,7 +9,6 @@ comments: true
 tags: [java, JDK14]
 ---
 
-<!-- Attention -->
 ### Have you ever received NullPointerException ?
 Every Java developer has encountered NullPointerExceptions, this is most common programming error new Java Developers face.
 
@@ -41,7 +40,7 @@ In above example it is clear list is null but several other situation it is not 
 Here you may get NullPointerException, when ***objectA*** or ***objectA.getObjectB()*** or ***objectA.getObjectB().getObjectC()*** any of them is null. And you get same NullPointerException message in all these cases.
 
 <br>
-<!-- Interest -->
+
 ### Java 14 can show you root cause of NullPointerException
 
 Now Java 14 has added language feature to show root cause of NullPointerException.
@@ -49,7 +48,7 @@ This language feature has been part of [SAP](https://twitter.com/SweetSapMachine
 
 
 <br>
-<!-- Desire -->
+
 ### Helpful NullPointerException
 
 In Java 14 you can start passing -XX:+ShowCodeDetailsInExceptionMessages in VM arguments and it helps you to see root cause of NullPointerException.
@@ -73,7 +72,7 @@ Process finished with exit code 1
 ```
 
 <br>
-<!-- Action -->
+
 ### At the end
 
 To learn best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
