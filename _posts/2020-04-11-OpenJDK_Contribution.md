@@ -1,29 +1,27 @@
 ---
 layout:     post
 title:      "How to start contribution in OpenJDK"
-subtitle:   "How to start contribution in OpenJDK "
+subtitle:   "OpenJDK"
 date:       2020-04-11 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/OpenJDK_SS.jpeg"
 comments: true
 tags: [java, OpenJDK]
 ---
-<!-- TOC START min:1 max:3 link:true asterisk:false update:true -->
-  - [How to start contribution in OpenJDK](#how-to-start-contribution-in-openjdk)
-    - [Prepare your development env](#prepare-your-development-env)
-    - [Setting up the project in IDE](#setting-up-the-project-in-ide)
-    - [Testing your change using JTREG](#testing-your-change-using-jtreg)
-    - [Preparing patch](#preparing-patch)
-    - [Two important things I learned in initial commits](#two-important-things-i-learned-in-initial-commits)
-    - [Resources](#resources)
-    - [At the end](#at-the-end)
-<!-- TOC END -->
 
+### What is OpenJDK?
+Every Java Developer is using OpenJDK, this is most impactful project for Java Developers.
+OpenJDK is the open-source Java SE implementation where Oracle is biggest contributor along
+with other companies Red Hat, SAP, Google, BellSoft etc.
 
-## How to start contribution in OpenJDK
-(***This is initial draft for post***)
+<!--
+### Why is this difficult to contribute in OpenJDK ?
+Thousands of developers, collaboration with employees of many companies, specific mailing lists of different areas in OpenJDK, source code not on github like many other open-source softwares.
+-->
 
-The first link to read should be: https://openjdk.java.net/contribute/
+### How to start contribution in OpenJDK
+
+The first link for contributor to read is: https://openjdk.java.net/contribute/
 
 In this step 0 is get OCA signed.
 
@@ -31,16 +29,7 @@ Although the page says it takes 2 weeks, for me it was fast, I did some mistake 
 It might take a couple of days' time, meanwhile, you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-The popular link you might find on google search to prepare env is from JDK11 specific branch:
-
-https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html
-
-Following is the link from latest JDK branch:
-
-https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html
-
-<br>
-From above link Instructions for the Impatient are:
+[This](https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html) is the link from JDK source repository. From this link Instructions for the Impatient are:
 
 1. Get the complete source code:
 hg clone http://hg.openjdk.java.net/jdk/jdk
@@ -48,7 +37,7 @@ hg clone http://hg.openjdk.java.net/jdk/jdk
 2. Run configure:
     bash configure
 
-      If configure fails due to missing dependencies (to either the toolchain, build tools, external libraries or the boot JDK), most of the time it prints a suggestion on how to resolve the situation on your platform. Follow the instructions, and try running bash configure again.
+      If configure fails due to missing dependencies, it prints a suggestion on how to resolve that on your machine. Follow the instructions, and try running bash configure again.
 
 3. Run make:
   make images
@@ -60,7 +49,7 @@ hg clone http://hg.openjdk.java.net/jdk/jdk
 make run-test-tier1
 
 
-In case you stuck anywhere in the above steps, most probably you can find a solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
+In case you get stuck anywhere in the above steps,  you can find a solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
 And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
 
 **2 Problems I faced are:**
@@ -148,7 +137,7 @@ Following command will run all the tests in the test/jdk/java/lang/Appendable/ a
 /home/vipin/IdeaProjects/newjdk/jdk$ /home/vipin/IdeaProjects/jtreg/build/images/jtreg/lib/jtreg.jar -jdk:/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk/  test/jdk/java/lang/Appendable/
 ```
 
-Following command is running individual test Basic.java
+Following command is running individual test file Basic.java
 ```
 /home/vipin/IdeaProjects/jtreg/build/images/jtreg/lib/jtreg.jar -jdk:/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk/  test/jdk/java/lang/Appendable/Basic.java
 ```
@@ -179,7 +168,7 @@ vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
 ```
 
 ### Preparing patch
-Once you identify what you would contribute and then you need to prepare patch using [webrev.ksh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
+After fixing some issue you need to prepare patch using [webrev.ksh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
 After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in the same directory.
 
@@ -187,7 +176,7 @@ After copying webrev.sh in my jdk directory executed following command, it gener
 ksh ./webrev.ksh
 ```
 
-After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug Id on your behalf.
+After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug id for you.
 
 Once you have bug id, submit a review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
 
@@ -212,7 +201,7 @@ You can not attach anything and send to the email list. If this is a small patch
 3. https://openjdk.java.net/contribute/
 4. https://openjdk.java.net/bylaws#_7
 5. https://adoptopenjdk.gitbooks.io/adoptopenjdk-getting-started-kit/content/en/
-6. https://www.youtube.com/watch?v=dzm4EqLuuNQ video from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
+6. https://www.youtube.com/watch?v=dzm4EqLuuNQ from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
 
 <br>
 
