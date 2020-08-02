@@ -75,6 +75,6 @@ Process finished with exit code 1
 
 ### At the end
 
-To learn the best java language features and get the best Java Jobs download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
+To learn the best java language features and get the best Java Jobs, download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
 
 Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
