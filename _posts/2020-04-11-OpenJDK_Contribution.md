@@ -10,9 +10,7 @@ tags: [java, OpenJDK]
 ---
 
 ### What is OpenJDK?
-Every Java Developer is using OpenJDK, this is most impactful project for Java Developers.
-OpenJDK is the open-source Java SE implementation where Oracle is biggest contributor along
-with other companies Red Hat, SAP, Google, BellSoft etc.
+Every Java Developer is using OpenJDK. This makes OpenJDK the most impactful project for Java Developers. OpenJDK is the open-source Java SE implementation. Oracle is the biggest contributor. But many other companies are part of the project, like Red Hat, SAP, Google, BellSoft and many more.
 
 <!--
 ### Why is this difficult to contribute in OpenJDK ?
@@ -21,12 +19,9 @@ Thousands of developers, collaboration with employees of many companies, specifi
 
 ### How to start contribution in OpenJDK
 
-The first link for contributor to read is: https://openjdk.java.net/contribute/
+Sign [Oracle Contributor Agreement](https://www.oracle.com/technetwork/oca-405177.pdf) to start contribution. Scan it and e-mail the result to oracle-ca_us(at)oracle.com
 
-In this step 0 is get OCA signed.
-
-Although the page says it takes 2 weeks, for me it was fast, I did some mistake in form and the oracle team helped me to submit it again.
-It might take a couple of days' time, meanwhile, you can prepare your development env ready for contribution.
+Although the page says it takes 2 weeks, for me it was fast. I did some mistakes in the form and Oracle's team helped me to submit it again. It might take a couple of days. Meanwhile, you can prepare your development env ready for contribution.
 
 ### Prepare your development env
 [This](https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html) is the link from JDK source repository. From this link Instructions for the Impatient are:
@@ -37,7 +32,7 @@ hg clone http://hg.openjdk.java.net/jdk/jdk
 2. Run configure:
     bash configure
 
-      If configure fails due to missing dependencies, it prints a suggestion on how to resolve that on your machine. Follow the instructions, and try running bash configure again.
+      If configure command fails, it prints a suggestion on how to resolve that on your machine. Follow the instructions, and try running bash configure again.
 
 3. Run make:
   make images
@@ -49,17 +44,17 @@ hg clone http://hg.openjdk.java.net/jdk/jdk
 make run-test-tier1
 
 
-In case you get stuck anywhere in the above steps,  you can find a solution on [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html).
-And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
+
+In case you get stuck anywhere in the above steps, you can find a solution on the [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html). And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
 
 **2 Problems I faced are:**
 
-    1.  Failure in configure command, it failed due to some external libraries missing.
+    1.  Failure in the configure command, it failed due to some external libraries missing.
 
     2.  Failure while running tests.
 
 
-**For problem 1**, got a message on console saying install set of libraries and it worked after installing those.
+**For problem 1**, I got a message on the console saying install a set of libraries. It worked after installing those.
 
 Initially, I tried below, it failed due to case mismatch, it should have been libx11-dev not libX11-dev:
 
@@ -83,7 +78,7 @@ I have jtreg source code as well so in my case this option was something like th
 
 Once your setup is successful and you execute tests, the result will be something like this:
 
-At end of test you will see below output:
+At the end of the test you will see below output:
 
 ```
 ==============================
@@ -122,7 +117,7 @@ After this, you may want to setup JDK project in IDE. I use IntelliJ and we have
 idea.sh java.base
 ```
 
-In case you want to set up all modules then just run ```idea.sh```.
+In case you want to set up all modules then run ```idea.sh```.
 
 <br>
 
@@ -130,9 +125,9 @@ In case you want to set up all modules then just run ```idea.sh```.
 
 Two ways you can run JTREG tests, command line and GUI.
 
-**Using command line**
+**Using the command line**
 
-Following command will run all the tests in the test/jdk/java/lang/Appendable/ and its sub-folders.
+The following command will run all the tests in the test/jdk/java/lang/Appendable/ and its sub-folders.
 ```
 /home/vipin/IdeaProjects/newjdk/jdk$ /home/vipin/IdeaProjects/jtreg/build/images/jtreg/lib/jtreg.jar -jdk:/home/vipin/IdeaProjects/newjdk/jdk/build/linux-x86_64-server-release/jdk/  test/jdk/java/lang/Appendable/
 ```
@@ -154,7 +149,7 @@ Following is JTREG GUI on my system
 ![JTREG GUI](../img/posts/jtreg.jpg)
 
 
-In above command test/jdk/ dir has TEST.ROOT file, below dirs have TEST.ROOT
+In the above command test/jdk/ dir has TEST.ROOT file, below directories have TEST.ROOT
 
 ```
 vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
@@ -167,6 +162,8 @@ vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
 ./make/langtools/test/TEST.ROOT
 ```
 
+<br>
+
 ### Preparing patch
 After fixing some issue you need to prepare patch using [webrev.ksh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
@@ -176,14 +173,15 @@ After copying webrev.sh in my jdk directory executed following command, it gener
 ksh ./webrev.ksh
 ```
 
-After creating a patch you need bug id to submit patch against that bug, send email to the corresponding [email list](https://mail.openjdk.java.net/mailman/listinfo). Initially, someone should sponsor your fix and create a bug id for you.
+After creating a patch you need the bug id to submit it against that bug. Send an email to the corresponding email list. Initially, someone should sponsor your fix and create a bug id for you.
 
-Once you have bug id, submit a review request. The review request should be clearly marked as such: "RFR <bug-id>: <synopsis>"
+Once you have bug id, submit a review request. The review request should be marked as such: “RFR : "
 
-e.g.
-RFR 8240524: Removed warnings from test classes
+e.g. RFR 8240524: Removed warnings from test classes
 
-You can not attach anything and send to the email list. If this is a small patch then you can add patch text in an email or talk to sponsor how do they want to accept it.
+You can not attach anything and send it to the email list. If this is a small patch then you can add patch text in an email or talk to sponsor how do they want to accept it.
+
+<br>
 
 ### Two important things I learned in initial commits
 1. Update copyright year in files, there can be 2 formats for the year in files, it should be updated as follows:
@@ -194,6 +192,13 @@ You can not attach anything and send to the email list. If this is a small patch
 2. A significant portion of code in package jdk.internal.icu comes from an upstream project, ICU4J. Changes in these packages should be done at [upstream](https://github.com/unicode-org/icu/tree/master/icu4j).
 
 
+<br>
+
+### At the end
+
+Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
+
+
 ### Resources
 
 1. https://openjdk.java.net/guide/index.html
@@ -202,11 +207,3 @@ You can not attach anything and send to the email list. If this is a small patch
 4. https://openjdk.java.net/bylaws#_7
 5. https://adoptopenjdk.gitbooks.io/adoptopenjdk-getting-started-kit/content/en/
 6. https://www.youtube.com/watch?v=dzm4EqLuuNQ from [@brjavaman](https://twitter.com/brjavaman) and [@DavidBuckJP](https://twitter.com/DavidBuckJP)
-
-<br>
-
-### At the end
-
-To learn best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
-
-Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
