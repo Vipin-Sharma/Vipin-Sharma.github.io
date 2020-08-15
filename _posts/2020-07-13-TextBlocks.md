@@ -65,7 +65,7 @@ Following is console output for text blocks, it is same as we have written in co
 
 A text block consists of zero or more content characters, enclosed by opening and closing delimiters.
 
-1. ***The opening delimiter*** is a sequence of three double quote characters (""") followed by zero or more white spaces followed by a line terminator.
+1. ***The opening delimiter*** is a sequence of three double quote characters (\"\"\") followed by zero or more white spaces followed by a line terminator.
 2. ***The closing delimiter*** is a sequence of three double quote characters.
 3. ***The content*** begins at the first character after the line terminator of the opening delimiter and ends before closing delimiter.
 
