@@ -9,14 +9,13 @@ comments: true
 tags: [java, JDK15]
 ---
 
-Initial draft, work in progress.
+The initial draft, work in progress.
 
 <!-- Attention -->
-### Do you find Java multiline Strings non readable ?
-One of the goal for text blocks is to Simplify the task of writing Java programs 
+### Do you find Java multiline Strings not readable?
+One of the goals for text blocks is to Simplify the task of writing Java programs 
 by making it easy to express strings that span several lines of source code.
-It makes code readable and bug free. Let's try to understand its importance using following example.
-
+It makes code readable and bug free. Let's try to understand its importance using the following example.
 Can you spot a bug in below multiline String?
 
 ```java
@@ -31,7 +30,7 @@ Following is the console output for oldStringSQLExample.
 > select emp_id, emp_name, emp_num_of_kids, ***emp_<ins><span style="color:blue">activefrom</span></ins>***
 > ***employee_<ins><span style="color:blue">tablewhere</span></ins>*** employee_num_of_kids =1
 
-In this output notice words underlined in blue, here we don't have spaces in between words of consecutive lines. 
+In this output notice the words underlined in blue, here we don't have spaces between words of consecutive lines. 
 It causes SQLSyntaxErrorException.
 Next section we will see how this problem can be solved by new language feature text blocks. 
 
@@ -50,7 +49,7 @@ Now the same code we are writing using Java Text Blocks.
                     where employee_num_of_kids =1 
                     """; 
     
-Following is console output for text blocks, it is same as we have written in code. Space between words issue is resolved in this.
+Following is console output for text blocks, it is exactly the same as we have written in code. No issues due to space among consecutive lines.
 
 > select emp_id, emp_name, emp_num_of_kids, emp_active
 > from employee_table
@@ -87,17 +86,17 @@ The content of a text block is processed by the Java compiler in three steps in 
 
 1.    ***Line terminators***:               Line terminators in the content are translated to LF (\u000A).
     
-2.    ***Common white spaces removal***:           Incidental white space surrounding the content, introduced to match the indentation of Java source code, is removed.
+2.    ***Common white spaces removal***:           Incidental white space surrounding the content, introduced to match the indentation of Java source code is removed in this step.
     
-3.    ***Escape sequence processing***:     Escape sequences in the content are interpreted. Performing interpretation as the final step means developers can write escape sequences such as \n without them being modified or deleted by earlier steps.
+3.    ***Escape sequence processing***:     Escape sequences in the content are interpreted in this step. Performing interpretation as the final step means developers can write escape sequences such as \n without them being modified or deleted by earlier steps.
 
 
 The following sections discuss compile-time processing in more detail.
 
 #### Line terminators
 Different operating systems have their [Line terminators](https://en.wikipedia.org/wiki/Newline).
-All line terminators (CR/LF/CRLF) in the content are translated to LF (\u000A). 
-It makes same java code work across platforms.
+All line terminators (CR/LF/CRLF) in the content are translated into LF (\u000A). 
+It makes the same java code work across platforms.
 
 #### White space removal
 <!--
@@ -152,13 +151,15 @@ It makes same java code work across platforms.
     We will look at examples to understand it better.
     
 -->
+
+#### White space removal
 Following two things help us understand whitespace removal.      
-1.  There has to be one line terminator immediately after initial opening delimiter.
-2.  Now we have content and closing delimiter. if we move any line of content or closing delimiter to left it reduces common whitespace prefix. In other words left most character in content or end delimiter decides starting character of all lines in text block.
+1.  There has to be one line terminator immediately after the initial opening delimiter.
+2.  Now we have content and closing delimiter. if we move any line of content or closing delimiter to left it reduces common whitespace prefix. In other words, left most character in content or end delimiter decides starting character of all lines in the text block.
 
 Let's check some examples to understand how it works in practice.
 
-***This is first example*** having now whitespaces in the output.
+***This is the first example*** having now whitespaces in the output.
 In all the examples dots show spaces in code.
 
 ```
@@ -180,7 +181,7 @@ In all the examples we are using \| to visualize the left margin
 ```
 
 
-***This is second example*** showing initial character position in text block is decided by start of second line in text block content,
+***This is the second example*** showing initial character position in the text block is decided by start of the second line in text block content,
     which has leftmost character out of content and end delimiter.
 
 ```
@@ -194,8 +195,8 @@ System.out.println(textBlock);
 
 ```
 
-Following is the output of second example. 
-We can see initial 4 spaces which are common are removed in output. 
+Following is the output of the second example. 
+We can see the initial 4 spaces that are common are removed in output.  
 
 ```
 |    First line of test block
@@ -203,7 +204,7 @@ We can see initial 4 spaces which are common are removed in output.
 |
 ```
 
-***This is third example*** showing effect of moving end delimiter to left.  
+***This is the third example*** showing the effect of moving end delimiter to left.  
 
 
 ```
@@ -216,7 +217,7 @@ System.out.println(textBlock);
 }
 ```
 
-In following output of third example. We can see spaces at the end of line are removed.
+In the following output of the third example. We can see spaces at the end of the line are removed.
 Moving end delimiter 4 spaces to left adds 4 spaces in all the lines.
 
 ```
@@ -225,8 +226,8 @@ Moving end delimiter 4 spaces to left adds 4 spaces in all the lines.
 |
 ```
 
-***This is fourth example*** showing effect of moving end delimiter to right.
-Here we see moving end delimiter to right of content has no effect.
+***This is the fourth example*** showing the effect of moving end delimiter to right.
+Here we see moving end delimiter to the right of content has no effect.
 
 ```
 public static void printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect()
@@ -256,11 +257,11 @@ Following is the output of the fourth example, it shows no effect of moving end 
      Show use of this method -->
 
 #### Escape processing
-We have seen first line terminators are interpreted, then next step is white space removal and at the end
-escape processing. When we use \n in text block content, it will not be modified by initial 2 steps and will be interpreted
-at end.
+We have seen first line terminators are interpreted, then the next step is white space removal and at the end
+escape processing. When we use \n in text block content, it will not be modified by the initial 2 steps and will be interpreted
+at the end.
 
-Let's learn different language features in escape processing via following code example.   
+Let's learn different language features in escape processing via the following code example.   
 
 ```
 private static void printEscapeProcessing() {
@@ -276,7 +277,7 @@ private static void printEscapeProcessing() {
 }
 ```
 
-Following is the output of above escape processing example.
+Following is the output of the above escape processing example.
 
 ```
 |printEscapeProcessing
@@ -288,16 +289,14 @@ Following is the output of above escape processing example.
 |"
 ```
 
-In above output few things to observe are:
-1. \n is allowed in text block, and it generates additional new line in output.
-2. " and ' can be used freely in text blocks like Strings.
+In the above output few things to observe are:
+1. \n is allowed in the text block, and it generates an additional new line in the output.
+2. " and ' can be used anywhere in text blocks like Strings.
 3. to use \ we need to use \\\\.
 4. Sequences of three " characters require the escaping of at least one " to avoid mimicking the closing delimiter.
-5. To allow finer control of the processing of newlines and white space, two new escape sequences are introduced in java 15.  
-	1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words it avoids line terminator between  
-   consecutive lines.  
-	2.    ***\\s*** adds space
-
+5. To allow finer control of the processing of the newlines and white space, two new escape sequences are introduced in java 15.  
+   1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.  
+   2.    ***\\s*** adds space
 
 
 ### Common mistakes in text blocks
