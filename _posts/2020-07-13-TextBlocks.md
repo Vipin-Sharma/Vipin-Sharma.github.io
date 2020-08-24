@@ -98,7 +98,6 @@ Different operating systems have their [Line terminators](https://en.wikipedia.o
 All line terminators (CR/LF/CRLF) in the content are translated into LF (\u000A). 
 It makes the same java code work across platforms.
 
-#### White space removal
 <!--
     Incidental white space surrounding the content, introduced to match
     the indentation of Java source code, is removed.
@@ -164,13 +163,17 @@ In all the examples dots show spaces in code.
 
 ```
 public static void printTextBlock() {
-String textBlock = """
-........First line of test block
-........Second line of test block
-........""";
-System.out.println(textBlock);
+....String textBlock = """
+............First line of test block
+............Second line of test block
+............""";
+....System.out.println(textBlock);
 }
 ```
+
+Following is Intellij idea screen shot for above code.
+![SS](../img/posts/printTextBlock.png)
+
 Following is the output, showing all incidental white spaces removed.
 In all the examples we are using \| to visualize the left margin
 
@@ -186,14 +189,16 @@ In all the examples we are using \| to visualize the left margin
 
 ```
 public static void printInitialCharacterPositionDecidedByLeftMostCharacterOfLines() {
-String textBlock = """
-........First line of test block
-....Second line of test block
-........""";
-System.out.println(textBlock);
+....String textBlock = """
+............First line of test block
+........Second line of test block
+............""";
+....System.out.println(textBlock);
 }
-
 ```
+
+Following is Intellij idea screen shot for above code.
+![SS](../img/posts/printInitialCharacterPositionDecidedByLeftMostCharacterOfLines.png)
 
 Following is the output of the second example. 
 We can see the initial 4 spaces that are common are removed in output.  
@@ -209,13 +214,16 @@ We can see the initial 4 spaces that are common are removed in output.
 
 ```
 public static void printInitialCharacterPositionDecidedByEndDelimiter() {
-String textBlock = """
-........First line of test block........
-........Second line of test block........
-....""";
-System.out.println(textBlock);
+....String textBlock = """
+............First line of test block........
+............Second line of test block........
+........""";
+....System.out.println(textBlock);
 }
 ```
+
+Following is Intellij idea screen shot for above code.
+![SS](../img/posts/printInitialCharacterPositionDecidedByEndDelimiter.png)
 
 In the following output of the third example. We can see spaces at the end of the line are removed.
 Moving end delimiter 4 spaces to left adds 4 spaces in all the lines.
@@ -236,10 +244,14 @@ public static void printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect()
 ............First line of test block         
 ............Second line of test block      
 ................""";
-....System.out.println("textBlock Experiment printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect");
 ....System.out.println(textBlock);
 }
 ```
+
+Following is Intellij idea screen shot for above code.
+![SS](../img/posts/printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect.png)
+
+
 Following is the output of the fourth example, it shows no effect of moving end delimiter to left, all common white spaces are removed. 
 ```
 |First line of test block
@@ -247,15 +259,9 @@ Following is the output of the fourth example, it shows no effect of moving end 
 |
 ```
 
- <!--
-    After the content is re-indented, any escape sequences in the content are interpreted. 
-    Performing interpretation as the final step means developers can write escape
-    sequences such as \n without them being modified or deleted by
-    earlier steps.
- -->
 <!-- Developers will have access to escape processing via String::translateEscapes, a new instance method. 
-     Show use of this method -->
-
+     todo Show use of this method -->
+<br>
 #### Escape processing
 We have seen first line terminators are interpreted, then the next step is white space removal and at the end
 escape processing. When we use \n in text block content, it will not be modified by the initial 2 steps and will be interpreted
@@ -298,6 +304,7 @@ In the above output few things to observe are:
    1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.  
    2.    ***\\s*** adds space
 
+<br>
 
 ### Common mistakes in text blocks
 Here are some examples of ill-formed text blocks:
@@ -321,4 +328,5 @@ To learn the best java language features download my ebook [5 steps to Best Java
 Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
 
 ### Resources
-1. https://openjdk.java.net/jeps/378
+1. https://openjdk.java.net/jeps/378, This is Java enhancement proposal for text blocks in JDK15.
+2. https://github.com/Vipin-Sharma/JDK15Examples, this is link to code examples used in this post.
