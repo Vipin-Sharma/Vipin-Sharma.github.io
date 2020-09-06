@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Readable Java multiline Strings using Text Blocks"
-subtitle:   "Text Blocks "
+subtitle:   "Java 15 Text Blocks"
 date:       2020-08-01 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -13,31 +13,41 @@ The initial draft, work in progress.
 
 <!-- Attention -->
 ### Do you find Java multiline Strings not readable?
-One of the goals for text blocks is to Simplify the task of writing Java programs 
+
+Multi line strings in java are often not readable which makes it error prone as well.
+JDK 15 Standard feature Text blocks provides us better way to write strings that span several lines of source code.
+
+<!--One of the goals for text blocks is to Simplify the task of writing Java programs 
 by making it easy to express strings that span several lines of source code.
-It makes code readable and bug free. Let's try to understand its importance using the following example.
+It makes code readable and bug free.
+Let's try to understand its importance using the following example. 
+-->
+
+Let's check java code example to understand how text blocks makes our code more 
+readable and bug free. 
+
 Can you spot a bug in below multiline String?
 
 ```java
-String oldStringSQLExample = "select emp_id, emp_name, emp_num_of_kids, emp_active" +
-                "from employee_table" +
-                "where employee_num_of_kids =1";
+String oldMultiLineStringSQL = "select emp_id, emp_name, emp_num_of_kids, emp_active" +
+                             "from employee_table" +
+                             "where employee_num_of_kids =1";
 
-System.out.println(oldStringSQLExample);
+System.out.println(oldMultiLineStringSQL);
 ```
-Following is the console output for oldStringSQLExample. 
+Following is the console output for oldMultiLineStringSQL. 
 
 > select emp_id, emp_name, emp_num_of_kids, ***emp_<ins><span style="color:blue">activefrom</span></ins>***
 > ***employee_<ins><span style="color:blue">tablewhere</span></ins>*** employee_num_of_kids =1
 
 In this output notice the words underlined in blue, here we don't have spaces between words of consecutive lines. 
 It causes SQLSyntaxErrorException.
-Next section we will see how this problem can be solved by new language feature text blocks. 
+Next section we will see how this problem can be solved by Text blocks. 
 
 <br>
 
 <!-- Interest -->
-### Java 14 introduced Text Blocks, readable multiline Strings.
+### Text Blocks Java code
 
 Now the same code we are writing using Java Text Blocks.
 <!-- todo show this on webpage, maybe ss, because this is clearly visible right now, it all comes in one line -->
@@ -80,7 +90,9 @@ Above text block is equivalent to the string literal:
 > line 1\nline 2\nline 3\n
 -->
 
-Compile-time processing
+<br>
+
+### Text blocks compile-time processing
 
 The content of a text block is processed by the Java compiler in three steps in the same sequence as given below:
 
@@ -91,12 +103,12 @@ The content of a text block is processed by the Java compiler in three steps in 
 3.    ***Escape sequence processing***:     Escape sequences in the content are interpreted in this step. Performing interpretation as the final step means developers can write escape sequences such as \n without them being modified or deleted by earlier steps.
 
 
-The following sections discuss compile-time processing in more detail.
+The following sections has all 3 steps of compile-time processing in more detail.
 
 #### Line terminators
 Different operating systems have their [Line terminators](https://en.wikipedia.org/wiki/Newline).
 All line terminators (CR/LF/CRLF) in the content are translated into LF (\u000A). 
-It makes the same java code work across platforms.
+It makes the same java code work across all platforms.
 
 <!--
     Incidental white space surrounding the content, introduced to match
@@ -152,14 +164,17 @@ It makes the same java code work across platforms.
 -->
 
 #### White space removal
-Following two things help us understand whitespace removal.      
+Following two rules help us understand whitespace removal.
 1.  There has to be one line terminator immediately after the initial opening delimiter.
-2.  Now we have content and closing delimiter. if we move any line of content or closing delimiter to left it reduces common whitespace prefix. In other words, left most character in content or end delimiter decides starting character of all lines in the text block.
+2.  Now we have content and closing delimiter. if we move any line of content or closing delimiter to left it reduces common whitespace prefix. In other words, left most character in content or end delimiter decides the starting character of all lines in the text block.
 
 Let's check some examples to understand how it works in practice.
 
-***This is the first example*** having now whitespaces in the output.
-In all the examples dots show spaces in code.
+In all the examples
+ 1. dots (.) is used to show spaces in code.
+ 2. Vertical bar (\|) is used to visualize the left margin.
+
+***This is the first example*** having no whitespaces in the output.
 
 ```
 public static void printTextBlock() {
@@ -175,7 +190,6 @@ Following is Intellij idea screen shot for above code.
 ![SS](../img/posts/printTextBlock.png)
 
 Following is the output, showing all incidental white spaces removed.
-In all the examples we are using \| to visualize the left margin
 
 ```
 |First line of test block
@@ -183,9 +197,9 @@ In all the examples we are using \| to visualize the left margin
 |
 ```
 
-
+<br>
 ***This is the second example*** showing initial character position in the text block is decided by start of the second line in text block content,
-    which has leftmost character out of content and end delimiter.
+   out of all lines of content and end delimiter here second line has leftmost character.
 
 ```
 public static void printInitialCharacterPositionDecidedByLeftMostCharacterOfLines() {
@@ -259,15 +273,17 @@ Following is the output of the fourth example, it shows no effect of moving end 
 |
 ```
 
+In all these examples you can see green vertical bar in intellij idea shows starting character of lines in text block.
+
 <!-- Developers will have access to escape processing via String::translateEscapes, a new instance method. 
      todo Show use of this method -->
 <br>
 #### Escape processing
-We have seen first line terminators are interpreted, then the next step is white space removal and at the end
-escape processing. When we use \n in text block content, it will not be modified by the initial 2 steps and will be interpreted
+This is the third and last step of compile time processing. We have seen first line terminators are interpreted, then the next step is white space removal and at the end
+escape processing. And because this is last step in compile time processing when we use \n (or any other escapae sequence) in text block content, it will not be modified by the initial 2 steps and will be interpreted
 at the end.
 
-Let's learn different language features in escape processing via the following code example.   
+Let's learn different language features in escape processing using the below code example.
 
 ```
 private static void printEscapeProcessing() {
@@ -302,21 +318,21 @@ In the above output few things to observe are:
 4. Sequences of three " characters require the escaping of at least one " to avoid mimicking the closing delimiter.
 5. To allow finer control of the processing of the newlines and white space, two new escape sequences are introduced in java 15.  
    1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.  
-   2.    ***\\s*** adds space
+   2.    ***\\s*** adds space, in example output spaces are shown with dots (.)
 
 <br>
 
 ### Common mistakes in text blocks
 Here are some examples of ill-formed text blocks:
 
-```java
+```
 String a = """""";   // no line terminator after opening delimiter
 String b = """ """;  // no line terminator after opening delimiter
 String c = """
-           ";        // no closing delimiter (text block continues to EOF)
+           ";        // no closing delimiter
 String d = """
            abc \ def
-           """;      // unescaped backslash (escape processing discussed below)
+           """;      // unescaped backslashs
 
 ```
 <br>
