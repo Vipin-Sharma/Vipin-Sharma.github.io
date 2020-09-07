@@ -18,27 +18,37 @@ let's try to understand problems in current instanceof we are trying to solve.
 Following is common programming idiom for instanceof-and-cast pattern: 
 
 ```java
-if (obj instanceof String) {
-    String s = (String) obj;
-    // use s
+if (obj instanceof String) 
+{
+  String s = (String) obj;
+  int length = s.length();
 }
 ```
 
 Three tasks are done here:
-1. Test (is obj a String?)
-2. A conversion (casting obj to String) 
-3. The declaration of a new local variable (s) so we can use the string value. 
+1. Test (is `obj` a String?)
+2. A conversion (casting `obj` to `String`) 
+3. The declaration of a new local variable (`s`) so we can use the string value. 
 
 This pattern has 3 problems.
 
-1. It is tedious: doing both the type test and cast should be unnecessary 
+1. ***It is tedious***: doing both the type test and cast should be unnecessary 
 (what else would you do after an instanceof test?).
-2. This boilerplate: in particular, the three occurrences of the type String 
+2. ***This boilerplate***: in particular, the three occurrences of the type `String`
  obfuscates the more significant logic that follows.
-3. Most importantly, the repetition provides opportunities for errors to creep 
-unnoticed into programs.
+3. ***Repetition***, repetition of `String` provides opportunities 
+for errors to creep unnoticed into programs.
 
 Java solves these problems by the pattern matching.
+Now with improved instanceof operator same code is written as below:
+
+```java
+if (obj instanceof String s) 
+{
+    int length = s.length();
+}
+``` 
+
 <!-- 
     Pattern matching allows the desired 'shape' of an object to be expressed concisely 
     ***(the pattern)***, and for various statements and expressions to test that 
@@ -48,19 +58,21 @@ Java solves these problems by the pattern matching.
 <br>
 
 <!-- Interest -->
-### Type test pattern with instanceof operator
+### Improved instanceof operator with Type test pattern
 
+<!--
 A pattern is a combination of
  1. a predicate that can be applied to a target, and 
  2. a set of binding variables that are extracted from the target only 
     if the predicate successfully applies to it.
+-->
 
 A type test pattern consists of a predicate that specifies a type,
 along with a single binding variable.
 
 
-The instanceof operator is extended to take a type test pattern instead of just a type. 
-In the code below, Number number is the type test pattern:
+The `instanceof` operator is extended to take a type test pattern instead of just a type. 
+In the code below, `Number number` is the type test pattern:
 
 ```java
 if (integer instanceof Number number)
@@ -74,17 +86,22 @@ if (integer instanceof Number number)
 
 <!-- Desire -->
 <!-- ###  Scope of binding variable used with instanceof operator -->
-###  Flow sensitive scoping rules for instanceof binding variable
+###  Helpful flow sensitive scoping rules for instanceof binding variable
 
 The scope is one of the best parts in this language feature, the binding 
 variable is only available where it is required. It makes code bug free.
 
 To understand the scope we will go through 3 code examples.
 
-##### Basic case
+1. ***Basic case***
+2. ***expression with short circuit && operator***
+3. ***expression with short circuit \|\| operator***
+
+<br>
+#### Basic case
 Let's take a look at the basic scenario, following code example.
 
-```java             
+```java
 if (integer instanceof Number number) {
     System.out.println(number.intValue());
 } else {
@@ -92,16 +109,16 @@ if (integer instanceof Number number) {
 }
 ```
 
-In this example, the instanceof operator "matches" the target number to the type 
+In this example, the `instanceof` operator "matches" the target number to the type
 test pattern as follows:
-   1. if number is an instance of String, then it is cast to String
-        and assigned to the binding variable s.
-   2. The binding variable is in scope in the true block of the if statement, 
+   1. if number is an instance of `Number`, then it is cast to `Number`
+        and assigned to the binding variable `number`.
+   2. The binding variable is in scope in the true block of the if statement,
         and not in the false block of the if statement.
 
 <br>
 
-##### expression with short circuit && operator
+#### expression with short circuit && operator
 Now we will take an example of a little complex expression short circuit && operator.
 
 ```java
@@ -116,16 +133,16 @@ else
 }
 ```
 
-Here in the above example s.length() will be called only when obj is instance of String. 
-That's why it makes sense to have s accessible on right-hand side of the short circuit operator as well.
-When both conditions in short circuit && operator are true, which also means s is
- a String, s is accessible in if block as well.
+Here in the above example `s.length()` will be called only when `obj` is instance of `String`. 
+That's why it makes sense to have `s` accessible on right-hand side of the short circuit operator as well.
+When both conditions in short circuit && operator are true, which also means `s` is
+ a `String`, `s` is accessible in if block as well.
 
 
 <br>
 
-##### expression with short circuit \|\| operator
-Following is an example with \|\| operator.
+#### expression with short circuit \|\| operator
+Following is an example with `||` operator.
 
 ```java
 if (obj instanceof String s || s.length() > 3)
@@ -134,10 +151,10 @@ if (obj instanceof String s || s.length() > 3)
 }
 ```
 
-In the above example when obj is not String, it doesn't get cast and then assigned to the binding variable.s
-The binding variable s is not in scope on the right-hand side of the ||
+In the above example when `obj` is not `String`, it doesn't get cast and then assigned to the binding variable.
+The binding variable `s` is not in scope on the right-hand side of the `||`
 operator, nor is it in scope in the true block. 
-s at these points refers to a field in the enclosing class, if any available. 
+`s` at these points refers to a field in the enclosing class, if any available. 
 Otherwise, it shows compilation error.
 
 <br>
