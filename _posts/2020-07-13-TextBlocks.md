@@ -1,15 +1,13 @@
 ---
 layout:     post
 title:      "Readable Java multiline Strings using Text Blocks"
-subtitle:   "Java 15 Text Blocks"
+subtitle:   "Java 15 Bug free multi line strings"
 date:       2020-08-01 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
 comments: true
 tags: [java, JDK15]
 ---
-
-The initial draft, work in progress.
 
 <!-- Attention -->
 ### Do you find Java multiline Strings not readable?
@@ -26,7 +24,7 @@ Let's try to understand its importance using the following example.
 Let's check java code example to understand how text blocks makes our code more 
 readable and bug free. 
 
-Can you spot a bug in below multiline String?
+Can you spot a bug in the multiline String below?
 
 ```java
 String oldMultiLineStringSQL = "select emp_id, emp_name, emp_num_of_kids, emp_active" +
@@ -316,8 +314,8 @@ In the above output few things to observe are:
 2. " and ' can be used anywhere in text blocks like Strings.
 3. to use \ we need to use \\\\.
 4. Sequences of three " characters require the escaping of at least one " to avoid mimicking the closing delimiter.
-5. To allow finer control of the processing of the newlines and white space, two new escape sequences are introduced in java 15.  
-   1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.  
+5. To allow finer control of the processing of the newlines and white space, two new escape sequences are introduced in java 15, these were not present in earlier preview versions.  
+   1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.
    2.    ***\\s*** adds space, in example output spaces are shown with dots (.)
 
 <br>
@@ -339,9 +337,12 @@ String d = """
 
 ### At the end
 
-To learn the best java language features download my ebook [5 steps to Best Java Jobs](https://jfeatures.com/) for Free.
+Knowing language features like this helps you get the best java jobs, that's why to help you
+I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/).
+Download this step by step guide for free!
 
-Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
+[<img src="../img/ebook_upd.png" width="200" height="200">](https://jfeatures.com/)
+
 
 ### Resources
 1. https://openjdk.java.net/jeps/378, This is Java enhancement proposal for text blocks in JDK15.

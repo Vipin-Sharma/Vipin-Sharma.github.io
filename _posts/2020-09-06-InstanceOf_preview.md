@@ -15,7 +15,7 @@ The initial draft, work in progress.
 ### Why pattern matching for instanceof was required?
 
 let's try to understand problems in current instanceof we are trying to solve.
-Following is common programming idiom for instanceof-and-cast pattern: 
+Following is common programming idiom for instanceof-and-cast pattern:
 
 ```java
 if (obj instanceof String) 
@@ -142,7 +142,7 @@ When both conditions in short circuit && operator are true, which also means `s`
 <br>
 
 #### expression with short circuit \|\| operator
-Following is an example with `||` operator.
+This is an example with `||` operator, it has compilation error at `s.length()` and `s.charAt(1)`
 
 ```java
 if (obj instanceof String s || s.length() > 3)
@@ -151,19 +151,21 @@ if (obj instanceof String s || s.length() > 3)
 }
 ```
 
-In the above example when `obj` is not `String`, it doesn't get cast and then assigned to the binding variable.
+Here when obj is String, it doesn't need to evaluate expression on right side, 
+so s not accessible on right side expression (`s.length() > 3`).  
+When `obj` is not `String`, it doesn't get cast and then assigned to the binding variable.
 The binding variable `s` is not in scope on the right-hand side of the `||`
-operator, nor is it in scope in the true block. 
-`s` at these points refers to a field in the enclosing class, if any available. 
-Otherwise, it shows compilation error.
+operator, nor it is in scope in the true block, and we get compilation error.
 
 <br>
 
 ### At the end
 
-To learn the best java language features download my ebook [🔥***5 steps to Best Java Jobs***🔥](https://jfeatures.com/) for Free.
+Knowing language features like this helps you get the best java jobs, that's why to help you
+I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/).
+Download this step by step guide for free!
 
-Follow me on twitter [🔥***@vipinbit***🔥](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
+[<img src="../img/ebook_upd.png" width="200" height="200">](https://jfeatures.com/)
 
 ### Resources
 1. https://openjdk.java.net/jeps/375, This is Java enhancement proposal for Pattern Matching for instanceof in JDK15.
