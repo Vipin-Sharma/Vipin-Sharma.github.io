@@ -12,17 +12,17 @@ tags: [java, JDK15]
 <!-- Attention -->
 ### Do you find Java multiline Strings not readable?
 
-Multi line strings in java are often not readable which makes it error prone as well.
-JDK 15 Standard feature Text blocks provides us better way to write strings that span several lines of source code.
+Multi line strings in java are often not readable which makes it error-prone as well.
+JDK 15 Standard feature Text blocks provide us a better way to write strings that span several lines of source code.
 
 <!--One of the goals for text blocks is to Simplify the task of writing Java programs 
 by making it easy to express strings that span several lines of source code.
-It makes code readable and bug free.
+It makes code readable and bug-free.
 Let's try to understand its importance using the following example. 
 -->
 
-Let's check java code example to understand how text blocks makes our code more 
-readable and bug free. 
+Let's check the java code example to understand how text blocks make our code more 
+readable and bug-free. 
 
 Can you spot a bug in the multiline String below?
 
@@ -57,7 +57,7 @@ Now the same code we are writing using Java Text Blocks.
                     where employee_num_of_kids =1 
                     """; 
     
-Following is console output for text blocks, it is exactly the same as we have written in code. No issues due to space among consecutive lines.
+Following is console output for text blocks, it is the same as we have written in code. No issues due to space among consecutive lines.
 
 > select emp_id, emp_name, emp_num_of_kids, emp_active
 > from employee_table
@@ -72,9 +72,9 @@ Following is console output for text blocks, it is exactly the same as we have w
 
 A text block consists of zero or more content characters, enclosed by opening and closing delimiters.
 
-1. ***The opening delimiter*** is a sequence of three double quote characters (\"\"\") followed by zero or more white spaces followed by a line terminator.
-2. ***The closing delimiter*** is a sequence of three double quote characters.
-3. ***The content*** begins at the first character after the line terminator of the opening delimiter and ends before closing delimiter.
+1. ***The opening delimiter*** is a sequence of three double-quote characters (\"\"\") followed by zero or more white spaces followed by a line terminator.
+2. ***The closing delimiter*** is a sequence of three double-quote characters.
+3. ***The content*** begins at the first character after the line terminator of the opening delimiter and ends before the closing delimiter.
 
 <!--
 >     """
@@ -83,7 +83,7 @@ A text block consists of zero or more content characters, enclosed by opening an
 >     line 3    
 >     """
 
-Above text block is equivalent to the string literal:
+The above text block is equivalent to the string literal:
 
 > line 1\nline 2\nline 3\n
 -->
@@ -101,7 +101,7 @@ The content of a text block is processed by the Java compiler in three steps in 
 3.    ***Escape sequence processing***:     Escape sequences in the content are interpreted in this step. Performing interpretation as the final step means developers can write escape sequences such as \n without them being modified or deleted by earlier steps.
 
 
-The following sections has all 3 steps of compile-time processing in more detail.
+The following sections have all 3 steps of compile-time processing in more detail.
 
 #### Line terminators
 Different operating systems have their [Line terminators](https://en.wikipedia.org/wiki/Newline).
@@ -109,7 +109,7 @@ All line terminators (CR/LF/CRLF) in the content are translated into LF (\u000A)
 It makes the same java code work across all platforms.
 
 <!--
-    Incidental white space surrounding the content, introduced to match
+    Incidental white space surrounding the content introduced to match
     the indentation of Java source code, is removed.
     
     Example 1:
@@ -169,8 +169,8 @@ Following two rules help us understand whitespace removal.
 Let's check some examples to understand how it works in practice.
 
 In all the examples
- 1. dots (.) is used to show spaces in code.
- 2. Vertical bar (\|) is used to visualize the left margin.
+ 1. dots (.) are used to show spaces in code.
+ 2. Vertical bars (\|) are used to visualize the left margin.
 
 ***This is the first example*** having no whitespaces in the output.
 
@@ -184,7 +184,7 @@ public static void printTextBlock() {
 }
 ```
 
-Following is Intellij idea screen shot for above code.
+Following is the Intellij idea screenshot for the above code.
 ![SS](../img/posts/printTextBlock.png)
 
 Following is the output, showing all incidental white spaces removed.
@@ -196,8 +196,8 @@ Following is the output, showing all incidental white spaces removed.
 ```
 
 <br>
-***This is the second example*** showing initial character position in the text block is decided by start of the second line in text block content,
-   out of all lines of content and end delimiter here second line has leftmost character.
+***This is the second example*** showing initial character position in the text block is decided by the start of the second line in text block content,
+   out of all lines of content and end delimiter here, the second line has leftmost character.
 
 ```
 public static void printInitialCharacterPositionDecidedByLeftMostCharacterOfLines() {
@@ -209,7 +209,7 @@ public static void printInitialCharacterPositionDecidedByLeftMostCharacterOfLine
 }
 ```
 
-Following is Intellij idea screen shot for above code.
+Following is the Intellij idea screenshot for the above code.
 ![SS](../img/posts/printInitialCharacterPositionDecidedByLeftMostCharacterOfLines.png)
 
 Following is the output of the second example. 
@@ -221,7 +221,7 @@ We can see the initial 4 spaces that are common are removed in output.
 |
 ```
 
-***This is the third example*** showing the effect of moving end delimiter to left.  
+***This is the third example*** showing the effect of moving the end delimiter to left.  
 
 
 ```
@@ -234,11 +234,11 @@ public static void printInitialCharacterPositionDecidedByEndDelimiter() {
 }
 ```
 
-Following is Intellij idea screen shot for above code.
+Following is the Intellij idea screenshot for the above code.
 ![SS](../img/posts/printInitialCharacterPositionDecidedByEndDelimiter.png)
 
 In the following output of the third example. We can see spaces at the end of the line are removed.
-Moving end delimiter 4 spaces to left adds 4 spaces in all the lines.
+Moving the end delimiter 4 spaces to left adds 4 spaces in all the lines.
 
 ```
 |    First line of test block
@@ -246,8 +246,8 @@ Moving end delimiter 4 spaces to left adds 4 spaces in all the lines.
 |
 ```
 
-***This is the fourth example*** showing the effect of moving end delimiter to right.
-Here we see moving end delimiter to the right of content has no effect.
+***This is the fourth example*** showing the effect of moving the end delimiter to right.
+Here we see moving the end delimiter to the right of content has no effect.
 
 ```
 public static void printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect()
@@ -260,25 +260,25 @@ public static void printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect()
 }
 ```
 
-Following is Intellij idea screen shot for above code.
+Following is the Intellij idea screenshot for the above code.
 ![SS](../img/posts/printTextBlockMovingEndDelimiterToRightOfContentHasNoEffect.png)
 
 
-Following is the output of the fourth example, it shows no effect of moving end delimiter to left, all common white spaces are removed. 
+Following is the output of the fourth example, it shows no effect of moving the end delimiter to left, all common white spaces are removed. 
 ```
 |First line of test block
 |Second line of test block
 |
 ```
 
-In all these examples you can see green vertical bar in intellij idea shows starting character of lines in text block.
+In all these examples you can see the green vertical bar in the IntelliJ idea shows the starting character of lines in the text block.
 
 <!-- Developers will have access to escape processing via String::translateEscapes, a new instance method. 
      todo Show use of this method -->
 <br>
 #### Escape processing
-This is the third and last step of compile time processing. We have seen first line terminators are interpreted, then the next step is white space removal and at the end
-escape processing. And because this is last step in compile time processing when we use \n (or any other escapae sequence) in text block content, it will not be modified by the initial 2 steps and will be interpreted
+This is the third and last step of compile-time processing. We have seen first line terminators are interpreted, then the next step is white space removal and at the end
+escape processing. And because this is the last step in compile-time processing when we use \n (or any other escape sequence) in text block content, it will not be modified by the initial 2 steps and will be interpreted
 at the end.
 
 Let's learn different language features in escape processing using the below code example.
@@ -303,7 +303,7 @@ Following is the output of the above escape processing example.
 |printEscapeProcessing
 |"Hello
 |
-|Text Block " ' \ 	 "
+|Text Block " ' \   "
 |experiment another opening/closing delimiter type of 3 consecutive quotes """
 |without newline concatenation of Strings spaces ..at end in this way trailing spaces are not removed..  
 |"
@@ -315,7 +315,7 @@ In the above output few things to observe are:
 3. to use \ we need to use \\\\.
 4. Sequences of three " characters require the escaping of at least one " to avoid mimicking the closing delimiter.
 5. To allow finer control of the processing of the newlines and white space, two new escape sequences are introduced in java 15, these were not present in earlier preview versions.  
-   1.    ***\\*** at the end acts like concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.
+   1.    ***\\*** at the end acts like a concatenation of 2 Strings, in other words, it avoids line terminator between consecutive lines.
    2.    ***\\s*** adds space, in example output spaces are shown with dots (.)
 
 <br>
@@ -338,12 +338,12 @@ String d = """
 ### At the end
 
 Knowing language features like this helps you get the best java jobs, that's why to help you
-I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/).
+I wrote the ebook [5 steps to Best Java Jobs](https://jfeatures.com/).
 Download this step by step guide for free!
 
 [<img src="../img/ebook_upd.png" width="200" height="200">](https://jfeatures.com/)
 
 
 ### Resources
-1. https://openjdk.java.net/jeps/378, This is Java enhancement proposal for text blocks in JDK15.
-2. https://github.com/Vipin-Sharma/JDK15Examples, this is link to code examples used in this post.
+1. https://openjdk.java.net/jeps/378, This is the Java enhancement proposal for text blocks in JDK15.
+2. https://github.com/Vipin-Sharma/JDK15Examples, this is the link to code examples used in this post.
