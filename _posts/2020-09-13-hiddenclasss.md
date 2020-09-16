@@ -92,7 +92,6 @@ and protection domain as the lookup class, which is the class that originally
 obtained the lookup object on which Lookup::defineHiddenClass is invoked. 
 -->
 
-
 ```java
 public class HiddenClassDemo {
     public static void main(String[] args) throws Throwable {
@@ -109,7 +108,12 @@ public class HiddenClassDemo {
         System.out.println("End of main method in class " + HiddenClassDemo.class.getName());
     }
 }
+```
 
+```java
+public interface Test {
+    void test(String[] args);
+}
 ```
 
 ```java
@@ -117,8 +121,7 @@ public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) 
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
 
         cw.visit(V1_6, ACC_PUBLIC + ACC_SUPER, getHiddenClassName(ownerClassName),
-                null, "java/lang/Object", new String[] {"com/vip/jfeatures" +
-                        "/jdk15/hiddenclass/Test"});
+                null, "java/lang/Object", new String[] {"com/vip/jfeatures/jdk15/hiddenclass/Test"});
 
         ...
         ...
@@ -142,9 +145,12 @@ public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) 
 
 ### At the end
 
-To learn the best java language features download my ebook [🔥***5 steps to Best Java Jobs***🔥](https://jfeatures.com/) for Free.
+Knowing language features like this helps you get the best java jobs, that's why to help you
+I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/).
+Download this step by step guide for free!
 
-Follow me on twitter [🔥***@vipinbit***🔥](https://twitter.com/vipinbit) to get daily tips like this on Java Language Features.
+[<img src="../img/ebook_upd.png" width="200" height="200">](https://jfeatures.com/)
+
 
 ### Resources
 1. https://openjdk.java.net/jeps/371, This is Java enhancement proposal for Hidden classes in JDK15.

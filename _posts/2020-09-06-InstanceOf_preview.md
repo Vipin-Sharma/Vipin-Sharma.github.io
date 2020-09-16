@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Pattern matching for the instanceof operator"
-subtitle:   "Java 15 instanceof operator"
+subtitle:   "One more step to readable and bug free code in Java"
 date:       2020-09-06 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -11,10 +11,10 @@ tags: [java, JDK14, JDK15]
 
 The initial draft, work in progress.
 
-<!-- Attention -->
-### Why pattern matching for instanceof was required?
+<!-- Attention --> 
+### Boilerplate and error prone code with instanceof prior to java 14
 
-let's try to understand problems in current instanceof we are trying to solve.
+Let's try to understand problems with instanceof operator prior to java 14.
 Following is common programming idiom for instanceof-and-cast pattern:
 
 ```java
@@ -48,39 +48,40 @@ if (obj instanceof String s)
     int length = s.length();
 }
 ``` 
-
-<!-- 
-    Pattern matching allows the desired 'shape' of an object to be expressed concisely 
-    ***(the pattern)***, and for various statements and expressions to test that 
-    'shape' against their input ***(the matching)***.
--->
+Before going to details of this language feature it is worth understanding 
+what exactly is the pattern matching and important terminologies related to 
+pattern matching in instanceof.
 
 <br>
-
 <!-- Interest -->
-### Improved instanceof operator with Type test pattern
 
-<!--
-A pattern is a combination of
- 1. a predicate that can be applied to a target, and 
- 2. a set of binding variables that are extracted from the target only 
-    if the predicate successfully applies to it.
--->
+### Pattern matching
 
-A type test pattern consists of a predicate that specifies a type,
-along with a single binding variable.
+***A pattern*** is a combination of
+1. a match predicate that determines if the pattern matches a target
+2. a set of pattern variables that are conditionally extracted if the pattern matches the target.
+
+***A type test pattern*** consists of 
+1. a predicate that specifies a type 
+2. a single binding variable.
 
 
-The `instanceof` operator is extended to take a type test pattern instead of just a type. 
-In the code below, `Number number` is the type test pattern:
+Prior to java 14 the instanceof operator was taking just a type now it
+is extended to take `a type test pattern`.
 
+This is example of improved instanceof operator
 ```java
-if (integer instanceof Number number)
-{
-    System.out.println(number.intValue());
+if (obj instanceof String s) {
+    ...
 }
 ```
 
+In this example the instanceof operator ***matches*** the target obj to the type test pattern 
+as follows:
+1. Check if obj is an instance of String 
+2. If above check is true then cast obj to String and assigned to the binding variable s.
+
+This is overall pattern matching for instanceof operator.
 
 <br>
 
