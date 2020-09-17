@@ -12,13 +12,16 @@ tags: [java, JDK14, JDK15]
 The initial draft, work in progress.
 
 <!-- Attention --> 
-### Boilerplate and error prone code with instanceof prior to java 14
+### Repetitive and error-prone code with instanceof before java 14
 
-Let's try to understand problems with instanceof operator prior to java 14.
+<!-- 
+Let's try to understand problems with instanceof operator before java 14.
 Following is common programming idiom for instanceof-and-cast pattern:
+-->
+Following is typical example of instanceof operator before java 14.
 
 ```java
-if (obj instanceof String) 
+if (obj instanceof String)
 {
   String s = (String) obj;
   int length = s.length();
@@ -40,14 +43,110 @@ This pattern has 3 problems.
 for errors to creep unnoticed into programs.
 
 Java solves these problems by the pattern matching.
-Now with improved instanceof operator same code is written as below:
+After Java 14 with instanceof pattern matching same code is written as below:
 
 ```java
-if (obj instanceof String s) 
+if (obj instanceof String s)
 {
     int length = s.length();
 }
-``` 
+```
+
+It was basic example of instanceof pattern matching.
+It simplifies commonly messy operations. We will take 2 more examples to show how it simplifies code.   
+
+<br>
+
+#### 1. Simplification of equals method implementation
+For a class Point, we might implement equals() as follows
+
+```java
+class Point
+{
+    int x;
+    int y;
+}
+```
+
+```java
+public boolean equals(Object o) {
+    if (!(o instanceof Point))
+        return false;
+    Point other = (Point) o;
+    return x == other.x 
+        && y == other.y;
+}
+```
+
+Using a pattern match instead, we can combine this into a single expression, 
+eliminating the repetition and simplifying the control flow
+
+```java
+public boolean equals(Object o) {
+    return (o instanceof Point other)
+        && x == other.x
+        && y == other.y;
+}
+```
+
+<br>
+
+#### 2. Simplifying if else chain with instanceof pattern matching
+
+Following is the code of if else chain with instanceof before java 14
+
+```java
+private static void oldInstanceOf(Object obj)
+    {
+        String formatted = "unknown";
+        if (obj instanceof Integer) {
+            int i = (Integer) obj;
+            formatted = String.format("int %d", i);
+        }
+        else if (obj instanceof Byte) {
+            byte b = (Byte) obj;
+            formatted = String.format("byte %d", b);
+        }
+        else if (obj instanceof Long) {
+            long l = (Long) obj;
+            formatted = String.format("long %d", l);
+        }
+        else if (obj instanceof Double) {
+            double d = (Double) obj;
+            formatted = String.format("double %f", d);
+        }
+        else if (obj instanceof String) {
+            String s = (String) obj;
+            formatted = String.format("String %s", s);
+        }
+        System.out.println(formatted);
+    }
+```
+
+Now below is the code of if else chain using instanceof pattern matching
+
+```java
+    private static void newInstanceOf(Object obj) {
+        String formatted = "unknown";
+        if (obj instanceof Integer i) {
+            formatted = String.format("int %d", i);
+        }
+        else if (obj instanceof Byte b) {
+            formatted = String.format("byte %d", b);
+        }
+        else if (obj instanceof Long l) {
+            formatted = String.format("long %d", l);
+        }
+        else if (obj instanceof Double d) {
+            formatted = String.format("double %f", d);
+        }
+        else if (obj instanceof String s) {
+            formatted = String.format("String %s", s);
+        }
+        System.out.println(formatted);
+    }
+```
+
 Before going to details of this language feature it is worth understanding 
 what exactly is the pattern matching and important terminologies related to 
 pattern matching in instanceof.
@@ -55,7 +154,7 @@ pattern matching in instanceof.
 <br>
 <!-- Interest -->
 
-### Pattern matching
+### What is Pattern matching?
 
 ***A pattern*** is a combination of
 1. a match predicate that determines if the pattern matches a target
@@ -66,10 +165,10 @@ pattern matching in instanceof.
 2. a single binding variable.
 
 
-Prior to java 14 the instanceof operator was taking just a type now it
+Before java 14 the instanceof operator was taking just a type now it
 is extended to take `a type test pattern`.
 
-This is example of improved instanceof operator
+This is an example of an improved instanceof operator
 ```java
 if (obj instanceof String s) {
     ...
@@ -79,7 +178,7 @@ if (obj instanceof String s) {
 In this example the instanceof operator ***matches*** the target obj to the type test pattern 
 as follows:
 1. Check if obj is an instance of String 
-2. If above check is true then cast obj to String and assigned to the binding variable s.
+2. If the above check is true then cast obj to String and assigned to the binding variable s.
 
 This is overall pattern matching for instanceof operator.
 
@@ -112,7 +211,7 @@ if (integer instanceof Number number) {
 
 In this example, the `instanceof` operator "matches" the target number to the type
 test pattern as follows:
-   1. if number is an instance of `Number`, then it is cast to `Number`
+   1. if the number is an instance of `Number`, then it is cast to `Number`
         and assigned to the binding variable `number`.
    2. The binding variable is in scope in the true block of the if statement,
         and not in the false block of the if statement.
@@ -152,7 +251,7 @@ if (obj instanceof String s || s.length() > 3)
 }
 ```
 
-Here when obj is String, it doesn't need to evaluate expression on right side, 
+Here when obj is String, it doesn't need to evaluate the expression on the right side, 
 so s not accessible on right side expression (`s.length() > 3`).  
 When `obj` is not `String`, it doesn't get cast and then assigned to the binding variable.
 The binding variable `s` is not in scope on the right-hand side of the `||`
@@ -172,3 +271,4 @@ Download this step by step guide for free!
 1. https://openjdk.java.net/jeps/375, This is Java enhancement proposal for Pattern Matching for instanceof in JDK15.
 2. https://github.com/Vipin-Sharma/JDK15Examples, this is link to code examples used in this post.
 3. https://www.infoq.com/presentations/java-futures-2019/ , Presentation by Java Language Architect Brian Goetz.
+4. https://cr.openjdk.java.net/~briangoetz/amber/pattern-match.html
