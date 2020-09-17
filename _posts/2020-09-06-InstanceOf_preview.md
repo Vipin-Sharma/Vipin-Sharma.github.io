@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Pattern matching for the instanceof operator"
-subtitle:   "One more step to readable and bug free code in Java"
+subtitle:   "One more step to readable and bug-free code in Java"
 date:       2020-09-06 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
