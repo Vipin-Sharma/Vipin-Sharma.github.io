@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Pattern matching for the instanceof operator"
-subtitle:   "One more step to readable and bug-free code in Java"
+subtitle:   "One more step towards readable and bug-free code in Java"
 date:       2020-09-06 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -42,8 +42,8 @@ This pattern has 3 problems.
 3. ***Repetition***, repetition of `String` provides opportunities 
 for errors to creep unnoticed into programs.
 
-Java solves these problems by the pattern matching.
-After Java 14 with instanceof pattern matching same code is written as below:
+Java solves these problems by the pattern matching. In Java 14 and 15 with instanceof 
+pattern matching same code is written as below, you will not see repetition here.
 
 ```java
 if (obj instanceof String s)
@@ -53,7 +53,7 @@ if (obj instanceof String s)
 ```
 
 It was basic example of instanceof pattern matching.
-It simplifies commonly messy operations. We will take 2 more examples to show how it simplifies code.   
+It simplifies messy operations. We will take 2 more examples to show how it simplifies code.   
 
 <br>
 
