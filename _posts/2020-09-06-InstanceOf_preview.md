@@ -9,10 +9,7 @@ comments: true
 tags: [java, JDK14, JDK15]
 ---
 
-The initial draft, work in progress.
-
-<!-- Attention --> 
-### Repetitive and error-prone code with instanceof before java 14
+### Repetitive and error-prone code with instanceof pre java 14
 
 <!-- 
 Let's try to understand problems with instanceof operator before java 14.
@@ -42,8 +39,8 @@ This pattern has 3 problems.
 3. ***Repetition***, repetition of `String` provides opportunities 
 for errors to creep unnoticed into programs.
 
-Java solves these problems by the pattern matching. In Java 14 and 15 with instanceof 
-pattern matching same code is written as below, you will not see repetition here.
+Java solves these problems by pattern matching. instanceof pattern matching is preview features in Java 14 and 15.
+Using this same code is written as below, here you will not see the three problems we discussed.
 
 ```java
 if (obj instanceof String s)
@@ -147,13 +144,9 @@ Now below is the code of if else chain using instanceof pattern matching
     }
 ```
 
-Before going to details of this language feature it is worth understanding 
-what exactly is the pattern matching and important terminologies related to 
-pattern matching in instanceof.
+Before going to details of this language feature it is worth understanding what exactly is the pattern matching and important terminologies related to pattern matching in instanceof.
 
 <br>
-<!-- Interest -->
-
 ### What is Pattern matching?
 
 ***A pattern*** is a combination of
@@ -177,21 +170,20 @@ if (obj instanceof String s) {
 
 In this example the instanceof operator ***matches*** the target obj to the type test pattern 
 as follows:
-1. Check if obj is an instance of String 
-2. If the above check is true then cast obj to String and assigned to the binding variable s.
+1. Check if `obj` is an instance of `String` 
+2. If the above check is true then cast `obj` to `String` and assigned to the binding variable `s`.
 
 This is overall pattern matching for instanceof operator.
 
+To understand this feature completely we will need to understand scoping rules for binding variable. Next section we will try to understand scoping rules. 
+
 <br>
 
-<!-- Desire -->
-<!-- ###  Scope of binding variable used with instanceof operator -->
 ###  Helpful flow sensitive scoping rules for instanceof binding variable
 
-The scope is one of the best parts in this language feature, the binding 
-variable is only available where it is required. It makes code bug free.
+The scope is one of the best part of this language feature, the binding variable is available only where it is required. ***It makes code bug free.***
 
-To understand the scope we will go through 3 code examples.
+To understand the scope of binding variable we will go through 3 examples.
 
 1. ***Basic case***
 2. ***expression with short circuit && operator***
@@ -199,7 +191,7 @@ To understand the scope we will go through 3 code examples.
 
 <br>
 #### Basic case
-Let's take a look at the basic scenario, following code example.
+Let's take a look at the basic scenario, using following code example.
 
 ```java
 if (integer instanceof Number number) {
@@ -213,7 +205,7 @@ In this example, the `instanceof` operator "matches" the target number to the ty
 test pattern as follows:
    1. if the number is an instance of `Number`, then it is cast to `Number`
         and assigned to the binding variable `number`.
-   2. The binding variable is in scope in the true block of the if statement,
+   2. The binding variable is in scope of the true block of the if statement,
         and not in the false block of the if statement.
 
 <br>
