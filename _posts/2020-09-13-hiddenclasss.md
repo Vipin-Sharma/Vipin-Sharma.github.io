@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "Hidden classes"
-subtitle:   "Java 15 feature"
+title:      "Hidden class"
+subtitle:   "One more feature help to remove Unsafe usages"
 date:       2020-09-13 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -12,20 +12,20 @@ tags: [java, JDK15]
 The initial draft, work in progress.
 
 <!-- Attention -->
-### What are Hidden classes in Java
-Classes that cannot be used directly by the bytecode of other classes, are hidden classes.
+### What are Hidden classes in Java 15
+In Simple words classes that cannot be used directly by the bytecode of other classes are hidden classes.
 
-Hidden classes cannot be symbolically referenced by other classes and hence a hidden class 
-1. cannot be named as a supertype
-2. cannot be a declaring field type, 
-3. cannot be the parameter type or the return type. 
-4. cannot be found by class loader via `Class::forName`, `ClassLoader::loadClass`, 
-`Lookup::findClass` etc.
-
-
-Hidden classes allow frameworks/jvm languages to define classes as 
+Hidden classes allow frameworks/JVM languages to define classes as 
 non-discoverable implementation details, so that they ***cannot*** be linked against 
 by other classes.
+
+<!--Hidden classes cannot be symbolically referenced by other classes.--> 
+The following are a few properties of hidden class which also help us understand hidden classes. 
+1. cannot be named as a supertype
+2. cannot be a declaring field type
+3. cannot be the parameter type or the return type 
+4. cannot be found by classloader via `Class::forName`, `ClassLoader::loadClass`, 
+`Lookup::findClass` etc.
 
 
 <!--
@@ -36,7 +36,6 @@ intent to deprecate it for removal in a future release. -->
 <br>
 
 <!-- Interest -->
-<!--### Why hidden classes are required in Java?-->
 ### Why do we need this new language feature
 
 Framework/Language implementors usually intend for a dynamically generated class to be 
@@ -44,41 +43,57 @@ logically part of the implementation of a statically generated class.
 For this intent following are properties that are desirable for dynamically generated classes:
 
 
-1. Non-discoverability.
-Dynamic generated classes should not be discoverable by other classes in JVM.
+1. ***Non-discoverability***
+Dynamically generated classes should not be discoverable by other classes in JVM.
 (e.g. using Class::forName and ClassLoader::loadClass)
 
+2. ***Access control***
+An access control nest with non-discoverable classes, for example the host class mechanism 
+in Unsafe.defineAnonymousClass(), where a dynamically loaded class can use the 
+access control context of a host. [More on Java 11 feature nest based access control](https://openjdk.java.net/jeps/181) 
 
-2. Access control. 
-It may be desirable to extend the access control context of the statically 
-generated class to include the dynamically generated class.
-
-3. Lifecycle. Dynamically generated classes may only be needed for a limited time, 
+3. ***Lifecycle*** 
+Dynamically generated classes may only be needed for a limited time, 
 so retaining them for the lifetime of the statically generated class might 
 unnecessarily increase memory footprint. Existing workarounds for this situation, 
 such as per-class class loaders, are cumbersome and inefficient.
 
 
-Existing standard APIs ClassLoader::defineClass and Lookup::defineClass, always define 
-a visible/discoverable class, and in this way classes have longer lifecycle than desired.
-Hidden classes all of these 3 features desired by Framework/Language implementors.
+Existing standard APIs `ClassLoader::defineClass` and `Lookup::defineClass`, always define 
+a visible/discoverable class, and in this way classes have a longer lifecycle than desired.
+Hidden classes have all the above 3 features desired by Framework/Language implementors.
 
-Many language implementations built on the JVM rely upon dynamic class generation for flexibility and efficiency. 
-Before JDK15 dynamic classes were generated using non-standard API `sun.misc.Unsafe::defineAnonymousClass`.
-***Unsafe APIs are not recommended***. 
+### Current alternative for hidden classes sun.misc.Unsafe::defineAnonymousClass
+
+Many language implementations built on the JVM rely upon dynamic class generation 
+for flexibility and efficiency.
+Before Java15, non-standard API `sun.misc.Unsafe::defineAnonymousClass` was 
+used to generate dynamic classes.
+We know ***Unsafe APIs are not recommended***.
 
 Now we have standard API `Lookup::defineHiddenClass` to create Hidden classes. 
 `sun.misc.Unsafe::defineAnonymousClass` is deprecated since Java 15.
- 
+It is important to note in Java 15 hidden classes are not a complete replacement for `sun.misc.Unsafe::defineAnonymousClass`
 
-Best example for use of Hidden classes is lambda expressions in Java language.
+Few differences between Hidden classes and `sun.misc.Unsafe::defineAnonymousClass` are:
+1. Hidden classes do not support constant-pool patching. 
+JDK team is working on this [<ins>enhancement</ins>](https://mail.openjdk.java.net/pipermail/valhalla-dev/2020-November/008251.html)
+2. VM-anonymous classes (created using `sun.misc.Unsafe::defineAnonymousClass`) have self optimization ability for hotspot JVM.
+3. A VM-anonymous class can access protected members of its host class even if the 
+VM-anonymous class exists in a different run-time package and is not a subclass of the host class.
+4. A hidden class can join a nest at run time, a normal class cannot. 
+A nest is a set of classes that allow access to each other's private members but 
+without any of the backdoor accessibility-broadening methods usually associated 
+with nested classes in the Java language, it was introduced in Java 11.  
+
+The best example for use of Hidden classes is lambda expressions in Java language.
 JDK developers don't want to expose classes generated by lambda expression so
 javac is not translating lambda expression into dedicated class, it generates 
 bytecode that dynamically generates and instantiates a class to yield an object
 corresponding to the lambda expression when needed.
 
-Before Java 15 for Lambda expressions `sun.misc.Unsafe::defineAnonymousClass` was used in JDK. 
-Since Java 15 lambda expression are using Hidden classes.
+<!-- Before Java 15 for Lambda expressions `sun.misc.Unsafe::defineAnonymousClass` was used in JDK. 
+Since Java 15 lambda expression are using Hidden classes.-->
 
 <br>
 
@@ -95,7 +110,7 @@ obtained the lookup object on which Lookup::defineHiddenClass is invoked.
 
 <!--Hidden classes have different handling of classloaders, that makes it non discoverable to other classes.-->
 
-Hidden class is created by invoking Lookup::defineHiddenClass.
+The hidden class is created by invoking Lookup::defineHiddenClass.
 This causes the JVM to derive a hidden class from the supplied bytes, link the hidden class 
 and return a lookup object that provides reflective access to the hidden class.
 The invoking program should store the lookup object carefully,
@@ -104,12 +119,20 @@ as it is the only way to obtain the Class object of the hidden class.
 ```java
 public class HiddenClassDemo {
     public static void main(String[] args) throws Throwable {
+        // Step 1: Create lookup object.
         MethodHandles.Lookup lookup = MethodHandles.lookup();
-        ClassWriter cw =
-                GenerateClass.getClassWriter(HiddenClassDemo.class);
+        
+        //Step 2: get ClassWriter objects and then covert that into byte array.
+        // Here we are creating class implementing interface Test. 
+        // For more details, Look at method GenerateClass.getClassWriter, link https://github.com/Vipin-Sharma/JDK15Examples/blob/master/src/main/java/com/vip/jfeatures/jdk15/hiddenclass/GenerateClass.java#L22
+        ClassWriter cw = GenerateClass.getClassWriter(HiddenClassDemo.class);
         byte[] bytes = cw.toByteArray();
-
+        
+        //Sep 3: This is step creating Hidden class, It is important to note the invoking program should store the 
+        // lookup object carefully, for it is the only way to obtain the Class object of the hidden class.
         Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
+        
+        //Step 4: Creating constructor then Object of type Test and calling a simple function test. 
         Constructor<?> constructor = c.getConstructor(null);
         Object object = constructor.newInstance(null);
         Test test = (Test) object;
@@ -147,6 +170,7 @@ public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) 
     }
 ```
 
+Complete code is available at GitHub [repo](https://github.com/Vipin-Sharma/JDK15Examples)
 
 <br>
 
