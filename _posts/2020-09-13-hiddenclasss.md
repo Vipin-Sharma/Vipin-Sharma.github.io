@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Hidden class"
-subtitle:   "One more feature help to remove Unsafe usages"
+subtitle:   "One more feature help removing Unsafe usages"
 date:       2020-09-13 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
