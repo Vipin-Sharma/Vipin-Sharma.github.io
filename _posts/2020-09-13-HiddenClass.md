@@ -22,7 +22,6 @@ To remove Unsafe API usages JDK developers provide standard language features, H
 After introduction to Hidden classes sun.misc.Unsafe::defineAnonymousClass is deprecated in Java 15.
 
 Classes that cannot be used directly by the bytecode of other classes are hidden classes.
-
 Hidden classes allow frameworks/JVM languages to define classes as 
 non-discoverable implementation details, so that they ***cannot*** be linked against 
 by other classes.
@@ -71,6 +70,8 @@ of the statically generated class to include the dynamically generated class.
 Existing standard APIs `ClassLoader::defineClass` and `Lookup::defineClass` always define 
 a visible/discoverable class and in this way classes have a longer lifecycle than desired.
 Hidden classes have all the above 3 features desired by Framework/Language implementors.
+
+<br>
 
 ### Hidden classes as alternative for `Unsafe::defineAnonymousClass`
 
