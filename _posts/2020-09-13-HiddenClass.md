@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Hidden class"
-subtitle:   "One more java language feature to remove Unsafe usages"
+subtitle:   "Remove Unsafe API usages"
 date:       2020-09-13 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -13,7 +13,15 @@ The initial draft, work in progress.
 
 <!-- Attention -->
 ### What are Hidden classes in Java 15
-In Simple words classes that cannot be used directly by the bytecode of other classes are hidden classes.
+`sun.misc.Unsafe` APIs are not recommended to use outside JDK, with slight mistake it may result in jvm crash, 
+some cases code may not be portable across different platforms and many other problems. 
+
+
+On the other hand there are some useful features Unsafe APIs provide and we don't have alternative for those as standard language feature. 
+To remove Unsafe API usages JDK developers provide standard language features, Hidden class is one such feature.
+After introduction to Hidden classes sun.misc.Unsafe::defineAnonymousClass is deprecated in Java 15.
+
+Classes that cannot be used directly by the bytecode of other classes are hidden classes.
 
 Hidden classes allow frameworks/JVM languages to define classes as 
 non-discoverable implementation details, so that they ***cannot*** be linked against 
@@ -36,11 +44,13 @@ intent to deprecate it for removal in a future release. -->
 <br>
 
 <!-- Interest -->
-### Why do we need this new language feature
+### Why do we need Hidden classes
 
 Framework/Language implementors usually intend for a dynamically generated class to be 
-logically part of the implementation of a statically generated class. 
-For this intent following are properties that are desirable for dynamically generated classes:
+logically part of the implementation of a statically generated class.
+<!--Many language implementations and frameworks built on the JVM rely upon dynamic class generation for flexibility and efficiency.-->
+ 
+Following properties are desirable for dynamically generated classes:
 
 
 1. ***Non-discoverability***
@@ -54,33 +64,26 @@ unnecessarily increase memory footprint. Existing workarounds for this situation
 such as per-class class loaders, are cumbersome and inefficient.
 
 3. ***Access control***
-<!--An access control nest with non-discoverable classes, for example the host class mechanism 
-in Unsafe.defineAnonymousClass(), where a dynamically loaded class can use the 
-access control context of a host.--> 
-It may be desirable to extend the access control context of the statically generated 
-class to include the dynamically generated class.
-[More on Java 11 feature nest based access control](https://openjdk.java.net/jeps/181) 
+It may be desirable to extend the [access control context](https://openjdk.java.net/jeps/181) 
+of the statically generated class to include the dynamically generated class.
 
 
 Existing standard APIs `ClassLoader::defineClass` and `Lookup::defineClass` always define 
 a visible/discoverable class and in this way classes have a longer lifecycle than desired.
 Hidden classes have all the above 3 features desired by Framework/Language implementors.
 
-### Current alternative for hidden classes Unsafe::defineAnonymousClass
+### Hidden classes as alternative for `Unsafe::defineAnonymousClass`
 
-Many language implementations built on the JVM rely upon dynamic class generation 
-for flexibility and efficiency.
-Before Java15, non-standard API `sun.misc.Unsafe::defineAnonymousClass` was 
-used to generate dynamic classes.
-We know ***Unsafe APIs are not recommended***.
+<!--Before Java15, non-standard API `sun.misc.Unsafe::defineAnonymousClass` was used to generate dynamic classes.
+We know ***Unsafe APIs are not recommended***.-->
 
-<!--This language feature provides standard API `Lookup::defineHiddenClass` to create Hidden classes.--> 
-`Unsafe::defineAnonymousClass` is deprecated since Java 15.
-It is important to note in Java 15 hidden classes are not a complete replacement for `Unsafe::defineAnonymousClass`
+<!-- This language feature provides standard API `Lookup::defineHiddenClass` to create Hidden classes. 
+`Unsafe::defineAnonymousClass` is deprecated since Java 15.-->
 
 <!--Few differences between Hidden classes and `Unsafe::defineAnonymousClass` are:-->
 Before migrating from `Unsafe::defineAnonymousClass` to `Lookup::defineHiddenClass` (Hidden classes) we
-need to be aware of following constraints: 
+need to be aware of following constraints:
+
 1. Unlike `Unsafe::defineAnonymousClass`, Hidden classes do not support constant-pool patching.
 [<ins>This</ins>](https://mail.openjdk.java.net/pipermail/valhalla-dev/2020-November/008251.html) 
 is one recent thread showing progress on the enhancement. 
@@ -93,16 +96,17 @@ A hidden class can only access protected members of another class if the hidden 
 is in the same run-time package as, or a subclass of, the other class. There is no 
 special access for a hidden class to the protected members of the lookup class.
 
-<!-- 4. A hidden class can join a nest at run time, a normal class cannot. 
-A nest is a set of classes that allow access to each other's private members but 
-without any of the backdoor accessibility-broadening methods usually associated 
-with nested classes in the Java language, it was introduced in Java 11.-->
 
-The best example for use of Hidden classes is lambda expressions in JDK code.
+Due to these constraints in Java 15, hidden classes are not a complete replacement for `Unsafe::defineAnonymousClass`.
+
+
+The best example of Hidden classes usages is lambda expressions in JDK code.
 JDK developers don't want to expose classes generated by lambda expression so
 javac is not translating lambda expression into dedicated class, it generates 
 bytecode that dynamically generates and instantiates a class to yield an object
 corresponding to the lambda expression when needed.
+
+Before Java 15 `Unsafe::defineAnonymousClass` was used in lambda expression, now it is migrated to use Hidden classes.
 
 <!-- Before Java 15 for Lambda expressions `Unsafe::defineAnonymousClass` was used in JDK. 
 Since Java 15 lambda expression are using Hidden classes.-->
@@ -196,8 +200,5 @@ Download this step by step guide for free!
 
 
 ### Resources
-1. https://openjdk.java.net/jeps/371, This is Java enhancement proposal for Hidden classes in JDK15.
-2. https://github.com/Vipin-Sharma/JDK15Examples, this is link to code examples used in this post.
-3. https://mail.openjdk.java.net/pipermail/jdk-dev/2020-April/004183.html
-4. https://mail.openjdk.java.net/pipermail/valhalla-dev/2019-December/006630.html
-5. https://mail.openjdk.java.net/pipermail/serviceability-dev/2020-March/030835.html
+1. [Java enhancement proposal for Hidden classes in JDK15](https://openjdk.java.net/jeps/371)
+2. [Code examples](https://github.com/Vipin-Sharma/JDK15Examples) used in this post.
