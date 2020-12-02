@@ -2,7 +2,7 @@
 layout:     post
 title:      "Hidden class"
 subtitle:   "Remove Unsafe API usages"
-date:       2020-09-13 01:00:00
+date:       2020-12-01 01:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
 comments: true
