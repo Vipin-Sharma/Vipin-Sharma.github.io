@@ -12,7 +12,14 @@ tags: [java, JDK15, Unsafe]
 The initial draft, work in progress.
 
 <!-- Attention -->
-### What are Hidden classes in Java 15
+### What are hidden classes in Java 15
+
+As we know `sun.misc.Unsafe` APIs are not recommended to use outside JDK, with slight mistake it may result in the JVM crash.
+In some cases code may not be portable across different platforms and many other problems.
+
+On the other hand, there are some useful features Unsafe APIs provide and we don't have an alternative for those as a standard language feature. 
+To remove Unsafe API usages JDK developers provide standard language features, hidden class is one such feature.
+After introducing hidden classes `sun.misc.Unsafe::defineAnonymousClass` is deprecated in Java 15, which will be removed in future releases.
 
 Classes that cannot be used directly by the bytecode of other classes are hidden classes.
 Hidden classes allow frameworks/JVM languages to define classes as 
@@ -20,21 +27,12 @@ non-discoverable implementation details, so that they ***cannot*** be linked aga
 by other classes.
 
 <!--Hidden classes cannot be symbolically referenced by other classes.-->
-The following properties of hidden class help us understand it better.
+The following properties of the hidden class help us understand it better.
 1. cannot be named as a supertype
 2. cannot be a declaring field type
 3. cannot be the parameter type or the return type 
 4. cannot be found by classloader via `Class::forName`, `ClassLoader::loadClass`, 
 `Lookup::findClass` etc.
-
-
-`sun.misc.Unsafe` APIs are not recommended to use outside JDK, with slight mistake it may result in jvm crash, 
-some cases code may not be portable across different platforms and many other problems. 
-
-
-On the other hand there are some useful features Unsafe APIs provide and we don't have alternative for those as standard language feature. 
-To remove Unsafe API usages JDK developers provide standard language features, Hidden class is one such feature.
-After introduction to Hidden classes sun.misc.Unsafe::defineAnonymousClass is deprecated in Java 15, which will be removed in future release.
 
 
 <!--
@@ -45,7 +43,7 @@ intent to deprecate it for removal in a future release. -->
 <br>
 
 <!-- Interest -->
-### Why do we need Hidden classes
+### Why do we need hidden classes
 
 Framework/Language implementors usually intend for a dynamically generated class to be 
 logically part of the implementation of a statically generated class.
@@ -76,7 +74,7 @@ Hidden classes are dynamically generated and have all the above 3 features desir
 <br>
 
 <!-- Desire -->
-### How to write Hidden classes
+### How to write hidden classes
 
 <!--
 A hidden class specific way to have a defining class loader. 
@@ -89,23 +87,23 @@ obtained the lookup object on which Lookup::defineHiddenClass is invoked.
 <!--Hidden classes have different handling of classloaders, that makes it non discoverable to other classes.-->
 
 The hidden class is created by invoking Lookup::defineHiddenClass.
-This causes the JVM to derive a hidden class from the supplied bytes, link the hidden class 
+It causes the JVM to derive a hidden class from the supplied bytes, links the hidden class, 
 and return a lookup object that provides reflective access to the hidden class.
 The invoking program should store the lookup object carefully,
 as it is the only way to obtain the Class object of the hidden class.
 
-***Following are 4 steps to write Hidden classes:***
+***Following are 4 steps to write hidden classes:***
 
 Step 1:
 
-Get lookup object, which will be used to create Hidden class in next steps.
+Get a lookup object, which will be used to create hidden class in the next steps.
 ```java
 MethodHandles.Lookup lookup = MethodHandles.lookup();
 ```
 
 Step 2:
 
-We are using byte code manipulation library [ASM](https://asm.ow2.io/).
+We are using the byte code manipulation library [ASM](https://asm.ow2.io/).
 We create ClassWriter object using helper class [GenerateClass](https://github.com/Vipin-Sharma/JDK15Examples/blob/ec60c39c786ac93a77185f99dbcaf3f96e56bd7c/src/main/java/com/vip/jfeatures/jdk15/hiddenclass/GenerateClass.java#L16).
 If you look at details in GenerateClass, this class implements interface Test.
 
@@ -117,8 +115,8 @@ byte[] bytes = cw.toByteArray();
 
 Sep 3:
 
-In this step we are creating Hidden class. It is important to note the invoking program should store the 
-lookup object carefully, since it is the only way to obtain the Class object of the hidden class.
+In this step, we are creating a hidden class. It is important to note the invoking program should store the 
+lookup object carefully since it is the only way to obtain the Class object of the hidden class.
 
 ```java
 Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
@@ -126,9 +124,9 @@ Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
 
 Step 4:
 
-In this step we are using reflection to access Hidden class, first create the constructor 
-then object using this and then after type cast it makes call to method test. 
-This method ignores argument passed and is hard coded to print "Hello test" on the console.
+In this step, we are using reflection to access the hidden class. 
+first, create the constructor then create an object using this,  typecast this object to interface Test and call method test. 
+This method ignores the argument passed and prints "Hello test" on the console.
 
 ```java
 Constructor<?> constructor = c.getConstructor(null);
@@ -138,7 +136,7 @@ test.test(new String[]{""});
 ```
 
 
-***Following are 3 classes/interfaces we discussed in 4 steps:***
+***This is overall structure of code we discussed in 4 steps:***
 Complete code is available at GitHub [repo](https://github.com/Vipin-Sharma/JDK15Examples)
 
 ```java
@@ -151,7 +149,7 @@ public class HiddenClassDemo {
         ClassWriter cw = GenerateClass.getClassWriter(HiddenClassDemo.class);
         byte[] bytes = cw.toByteArray();
         
-        //Sep 3: Creating Hidden class.
+        //Sep 3: Creating hidden class.
         Class<?> c = lookup.defineHiddenClass(bytes, true, NESTMATE).lookupClass();
         
         //Step 4: Creating constructor then Object of type Test and calling a simple function test. 
@@ -200,19 +198,19 @@ public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) 
 <!--Before Java15, non-standard API `sun.misc.Unsafe::defineAnonymousClass` was used to generate dynamic classes.
 We know ***Unsafe APIs are not recommended***.-->
 
-<!-- This language feature provides standard API `Lookup::defineHiddenClass` to create Hidden classes. 
+<!-- This language feature provides standard API `Lookup::defineHiddenClass` to create hidden classes. 
 `Unsafe::defineAnonymousClass` is deprecated since Java 15.-->
 
 <!--Few differences between Hidden classes and `Unsafe::defineAnonymousClass` are:-->
 Before migrating from `Unsafe::defineAnonymousClass` to `Lookup::defineHiddenClass` (Hidden classes) we
-need to be aware of following constraints:
+need to be aware of the following constraints:
 
-1. Unlike `Unsafe::defineAnonymousClass`, Hidden classes do not support constant-pool patching.
+1. Unlike `Unsafe::defineAnonymousClass`, hidden classes do not support constant-pool patching.
 [<ins>This</ins>](https://mail.openjdk.java.net/pipermail/valhalla-dev/2020-November/008251.html) 
 is one recent thread showing progress on the enhancement. 
 2. VM-anonymous classes (created using `Unsafe::defineAnonymousClass`)
  can be optimized by Hotspot JVM by annotation @ForceInline. 
- This optimization is not available in Hidden classes.
+ This optimization is not available in hidden classes.
 3. A VM-anonymous class can access protected members of its host class even if the 
 VM-anonymous class exists in a different run-time package and is not a subclass of the host class.
 A hidden class can only access protected members of another class if the hidden class 
@@ -223,16 +221,14 @@ special access for a hidden class to the protected members of the lookup class.
 Due to these constraints in Java 15, hidden classes are not a complete replacement for `Unsafe::defineAnonymousClass`.
 
 
-The best example of Hidden classes usages is lambda expressions in JDK code.
-JDK developers don't want to expose classes generated by lambda expression so
-javac is not translating lambda expression into dedicated class, it generates 
-bytecode that dynamically generates and instantiates a class to yield an object
-corresponding to the lambda expression when needed.
-
-Before Java 15 `Unsafe::defineAnonymousClass` was used in lambda expression, now it is migrated to use Hidden classes.
+The best example of hidden class usages is lambda expressions in the JDK code. 
+JDK developers don't want to expose classes generated by lambda expression so 
+javac is not translating lambda expression into dedicated class, it generates bytecode 
+that dynamically generates and instantiates a class to yield an object corresponding to the lambda expression when needed.
+Before Java 15 `Unsafe::defineAnonymousClass` was used in the lambda expression implementation. Now it is migrated to use hidden classes.
 
 <!-- Before Java 15 for Lambda expressions `Unsafe::defineAnonymousClass` was used in JDK. 
-Since Java 15 lambda expression are using Hidden classes.-->
+Since Java 15 lambda expression are using hidden classes.-->
 
 <br>
 
@@ -246,5 +242,6 @@ Download this step by step guide for free!
 
 
 ### Resources
-1. [JEP for Hidden classes in JDK15](https://openjdk.java.net/jeps/371).
+1. [JEP for hidden classes in JDK15](https://openjdk.java.net/jeps/371).
 2. [Code examples used in this post](https://github.com/Vipin-Sharma/JDK15Examples).
+3. [Creating proxies using hidden class](https://github.com/forax/hidden_proxy).
