@@ -9,8 +9,6 @@ comments: true
 tags: [java, JDK15, Unsafe]
 ---
 
-The initial draft, work in progress.
-
 ### What are hidden classes in Java 15
 
 As we know `sun.misc.Unsafe` APIs are not recommended to use outside JDK, with slight mistake it may result in the JVM crash. In some cases code may not be portable across different platforms and many other problems.
