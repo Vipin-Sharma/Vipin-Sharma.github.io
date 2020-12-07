@@ -97,8 +97,8 @@ test.test(new String[]{""});
 ```
 <br>
 
-***This is overall structure of code we discussed in 4 steps:***
-Complete code is available at GitHub [repo](https://github.com/Vipin-Sharma/JDK15Examples)
+Below is the overall structure of the code we discussed above.
+The complete code is available in my GitHub [repo](https://github.com/Vipin-Sharma/JDK15Examples).
 
 ```java
 public class HiddenClassDemo {
@@ -158,7 +158,7 @@ public static ClassWriter getClassWriter(Class<HiddenClassDemo> ownerClassName) 
 
 <br>
 
-### Hidden classes as alternative for `Unsafe::defineAnonymousClass`
+### Hidden Classes as Unsafe Alternative
 
 Before Java15, non-standard API `Unsafe::defineAnonymousClass` was used to generate dynamic classes. We know Unsafe APIs are not recommended, hidden classes are right approach to generate dynamic classes now. 
 
@@ -179,7 +179,7 @@ The best example of hidden class usages is lambda expressions in the JDK code. J
 
 <br>
 
-### At the end
+### Conclusion
 
 Knowing language features like this helps you get the best java jobs, that's why to help you I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/). Download this step by step guide for free!
 
