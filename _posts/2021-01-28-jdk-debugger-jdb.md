@@ -13,7 +13,7 @@ tags: [OpenJDK, tools]
 
 ### jdb Utility
 
-Professional java developers use some IDE for debugging/troubleshooting applications. Intellij Idea, eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
+Professional java developers use some IDE for debugging/troubleshooting applications. Intellij Idea, Eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
 
 If you don't have access to any professional IDE, and you have access to JDK, you can use jdb. The jdb command line utility is included in the JDK. We can connect local or remote JVM using this for inspection or debugging.
 
