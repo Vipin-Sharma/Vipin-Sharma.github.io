@@ -2,7 +2,7 @@
 layout:     post
 title:      "jdb: Java Command line debugger"
 subtitle:   "Debugging java application without a professional IDE"
-date:       2020-12-26 00:00:00
+date:       2021-02-01 00:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
 comments: true
