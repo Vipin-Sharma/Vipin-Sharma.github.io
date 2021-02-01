@@ -13,7 +13,9 @@ tags: [OpenJDK, tools]
 
 ### jdb Utility
 
-The jdb command is included in the JDK as command-line debugger. We can connect local or remote JVM using this for inspection or debugging.
+Professional java developers use some IDE for debugging applications. Intellij Idea, eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
+
+If you don't have access to any professional IDE, and you have access to JDK, you can use jdb. The jdb command line utility is included in the JDK. We can connect local or remote JVM using this for inspection or debugging.
 
 jdb is available in jdk/bin directory. It uses the Java Debug Interface (JDI) to launch or connect to the target JVM. The Java Debug Interface (JDI) provides a Java programming language interface for debugging Java programming language applications. JDI is a part of the [Java Platform Debugger Architecture](https://docs.oracle.com/en/java/javase/15/docs/specs/jpda/architecture.html).
 
@@ -36,7 +38,7 @@ This is format of the jdb command:
 
 <br>
 
-#### Sample program to debug
+#### Java program we will be debugging in this post
 
 Following is sample class we are going to debug and try to understand different features available. It is important to compile this class with -g option (javac -g Test.java) in order to see local variables while debugging.
 
