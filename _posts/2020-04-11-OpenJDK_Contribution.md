@@ -24,10 +24,11 @@ Sign [Oracle Contributor Agreement](https://www.oracle.com/technetwork/oca-40517
 Although the page says it takes 2 weeks, for me it was fast. I did some mistakes in the form and Oracle's team helped me to submit it again. It might take a couple of days. Meanwhile, you can prepare your development env ready for contribution.
 
 ### Prepare your development env
-[This](https://hg.openjdk.java.net/jdk/jdk/raw-file/tip/doc/building.html) is the link from JDK source repository. From this link Instructions for the Impatient are:
+JDK GutHub repo provides steps to set up your development env. [This](https://github.com/openjdk/jdk/blob/master/doc/building.md) is the link from JDK source repository. From this link Instructions for the Impatient are:
 
-1. Get the complete source code:
-hg clone http://hg.openjdk.java.net/jdk/jdk
+1. Get the source code:
+    <!--First go to [OpenJDK GitHub Repo](https://github.com/openjdk/jdk/) and create your fork.-->  
+    git clone https://github.com/openjdk/jdk/
 
 2. Run configure:
     bash configure
@@ -45,7 +46,7 @@ make run-test-tier1
 
 
 
-In case you get stuck anywhere in the above steps, you can find a solution on the [same page](https://hg.openjdk.java.net/jdk/jdk11/raw-file/tip/doc/building.html). And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
+In case you get stuck anywhere in the above steps, you can find a solution on the [same page](https://github.com/openjdk/jdk/blob/master/doc/building.md). And it is ok to get stuck when you set up this first time, as it needs some libraries etc.
 
 **2 Problems I faced are:**
 
@@ -112,9 +113,9 @@ TEST SUCCESS
 
 ### Setting up the project in IDE
 
-After this, you may want to setup JDK project in IDE. I use IntelliJ and we have a shell script idea.sh comes along with jdk to setup a project for you. I wanted to setup module java.base only so my command was:
+After this, you may want to setup JDK project in IDE. I use IntelliJ, and we have a shell script idea.sh comes along with jdk to setup a project for you. I wanted to setup module java.base, executed following command from my base directory.
 ```
-idea.sh java.base
+./bin/idea.sh java.base
 ```
 
 In case you want to set up all modules then run ```idea.sh```.
@@ -167,7 +168,7 @@ vipin:/home/vipin/IdeaProjects/newjdk/jdk$ find . -name TEST.ROOT
 ### Preparing patch
 After fixing some issue you need to prepare patch using [webrev.ksh](https://hg.openjdk.java.net/code-tools/webrev/raw-file/tip/webrev.ksh)
 
-After copying webrev.sh in my jdk directory executed following command, it generated webrev dir and webrev.zip file in the same directory.
+First step is to copy webrev.sh in jdk source directory and then execute following command, it generates webrev dir and webrev.zip file in the same directory.
 
 ```
 ksh ./webrev.ksh
@@ -202,7 +203,7 @@ Follow me on twitter [@vipinbit](https://twitter.com/vipinbit) to get daily tips
 ### Resources
 
 1. https://openjdk.java.net/guide/index.html
-2. https://hg.openjdk.java.net/jdk/jdk/
+2. https://github.com/openjdk/jdk/
 3. https://openjdk.java.net/contribute/
 4. https://openjdk.java.net/bylaws#_7
 5. https://adoptopenjdk.gitbooks.io/adoptopenjdk-getting-started-kit/content/en/
