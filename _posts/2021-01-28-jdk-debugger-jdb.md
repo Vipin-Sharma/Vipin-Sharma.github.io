@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "jdb: Java Command line debugger"
-subtitle:   "Debugging java application without a professional IDE"
+title:      "Debugging Java app when you don't have access to IDE"
+subtitle:   "JDK command line debugger jdb"
 date:       2021-02-01 00:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -11,11 +11,18 @@ tags: [OpenJDK, tools]
 
 ***This is draft post, work in progress:***
 
-### jdb Utility
+###
 
-Professional java developers use some IDE for debugging/troubleshooting applications. Intellij Idea, Eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
+For Java applications typical production/test machines are linux servers without display managers, only command line tools are available.
+Some bugs are hard to replicate on desktop but easily replicated on production/test machine, it is a common situation for professional Java developers. To debug such problems JDK provides 2 tools, remote debugging and `jdb`. Remote debugging is useful, but debugging this very slow experience.
+`jdb` is command line debugger as part of JDK, we can use this for inspection or debugging Java application.
 
-If you don't have access to any professional IDE, and you have access to JDK, you can use jdb. The jdb command line utility is included in the JDK. We can connect local or remote JVM using this for inspection or debugging.
+<!-- Using `jdb` we can connect both local or remote JVM for inspection or debugging.-->
+
+<!--Professional java developers use some IDE for debugging/troubleshooting applications. Intellij Idea, Eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
+
+If you don't have access to any professional IDE, and you have access to JDK, you can use jdb.
+The jdb command line utility is included in the JDK. -->
 
 jdb is available in jdk/bin directory. It uses the Java Debug Interface (JDI) to launch or connect to the target JVM. The Java Debug Interface (JDI) provides a Java programming language interface for debugging Java programming language applications. JDI is a part of the [Java Platform Debugger Architecture](https://docs.oracle.com/en/java/javase/15/docs/specs/jpda/architecture.html).
 
