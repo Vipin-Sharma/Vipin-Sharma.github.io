@@ -11,39 +11,30 @@ tags: [java, JDK16]
 
 **This is a draft post, work in progress:**
 
-Synchronizing your code is not easy in all cases. When a Java object is not immutable, any thread in the application can change its state. Without synchronizing code, some threads might not see the updated state of the object. This is one of the biggest problem professional java developers deal with every day. The immutable nature of the record eliminates this problem completely.
+When a Java object is not immutable, any thread in the application can change its state. Without correctly synchronizing code, some threads might not see the updated state of the object. [Happens before order](https://docs.oracle.com/javase/specs/jls/se16/html/jls-17.html#jls-17.4.5) in Java memory model specifies when exactly some action is going to be visible to other action. In other words, happens before order specifies when exactly some updates made by one thread are going to be visible to other threads. This is one of the biggest problems professional java developers deal with every day. The immutable nature of the record eliminates this problem completely.
 
-**[Part 1](https://jfeatures.com/blog/records)** of the post we saw record provides a way to create data carrier-classes without writing a lot of boilerplate code. As part of this post, we will focus on the Immutability feature of the record. Immutability is one of the best features provided by records. We can use record objects without worrying about any other thread changing its state.
+**[Part 1](https://jfeatures.com/blog/records)** of the post we saw record provides a way to create data carrier-classes without writing a lot of boilerplate code. As part of this post, we will focus on the Immutability feature of the record. Immutability is one of the best features provided by records. We can use record objects without worrying about any other threads changing its state.
 
+<br>
 
-### Java language features making it immutable
+### Java language features making record immutable
 
 Following are few ways the state of a record class can be changed if it behaves like the java class. Along with this we are also discussing what are record features that prevent it from making record immutable.
 
-| Index   | Way to update record | record features preventing it |
+| Index   | Way to update record | java language features preventing it |
 |---------|------------|------------|
 |    1    | Create a record sub-class and change the state of the sub-class. | Record classes are implicitly final and can not be abstract, this way we can not create a sub-class of record class. |
 |    2    | Extend some other class(superclass) and change the state of the superclass.  | All record classes extend java.lang.Record by default so can not extend any other class. |
-|    3    | Create instance fields that can be modified. | Record classes cannot declare instance fields. Only record components carry the state of the record object which are final and assigned values while initializing record. |
-|    4    | Update record components. | Record components are implicitly final so can not be assigned a new value once initialized.  |
-|    5    | Update record components in the constructor. | Only the canonical constructor is allowed to do this, for other constructors assigning any of the record components in the constructor body became a compile-time error. |
-|    6    | Update record components using reflection. | Reflection [Field](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/reflect/Field.html#set(java.lang.Object,java.lang.Object)) API has been updated for specific handling of non-static fields which are part of record class. This treatment is similar to hidden classes. I have a separate post covering [Hidden classes](https://jfeatures.com/blog/HiddenClass) in detail. |
+|    3    | Add instance fields that can be modified. | Record classes cannot declare instance fields. |
+|    4    | Update record components. | We can not assign a new value to record components as these are implicitly final. These are assigned values while initializing the record in canonical constructor. |
+|    5    | Update record components in the constructor. |  Only canonical constructor can update record components. For other types of constructors assigning any of the record components in the constructor body results in a compile-time error. |
+|    6    | Update record components using reflection. | Record components have specific handling in Reflection [Field](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/reflect/Field.html#set(java.lang.Object,java.lang.Object)) API. This treatment is like hidden classes. You can read more about Hidden classes [here](https://jfeatures.com/blog/HiddenClass). |
 
-
-
-<!--
-1. Create a record sub-class and change the state of the sub-class. Record classes are implicitly final and can not be abstract, this way we can not create a sub-class of record class.
-2. Extend some other class(superclass) and change the state of the superclass. All record classes extend java.lang.Record by default so can not extend any other class.
-3. Create instance fields that can be modified. Record classes cannot declare instance fields. Only record components carry the state of the record object which are final and assigned values while initializing record.
-4. Update record components. Record components are implicitly final so can not be assigned a new value once initialized.
-5. Update record components in the constructor. Only the canonical constructor is allowed to do this, for other constructors assigning any of the record components in the constructor body became a compile-time error.
-6. Update record components using reflection. Reflection [Field](https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/reflect/Field.html#set(java.lang.Object,java.lang.Object)) API has been updated for specific handling of non-static fields which are part of record class. This treatment is similar to hidden classes. I have a separate post covering [Hidden classes](https://jfeatures.com/blog/HiddenClass) in detail.
--->
 <br>
 
 ### Shallowly immutable
 
-Record components are final, which means you can not change the field once assigned. Although fields of record components can be changed, there is no restriction on that, it makes record shallowly immutable. Let's see this with an example.
+Record components are final, which means you can not change the field once assigned. Although we can change fields of the record component, there is no restriction on that, it makes the record shallowly immutable. Let's see this with an example.
 
 ```java
 public class EmployeeTest {
@@ -84,5 +75,6 @@ If you want to get amazing Java jobs, I wrote an ebook [5 steps to Best Java Job
 
 ### Resources
 
-1.  https://openjdk.java.net/jeps/395
-2.  https://cr.openjdk.java.net/~briangoetz/amber/datum.html
+1. [JEP 395](https://openjdk.java.net/jeps/395)
+2. https://cr.openjdk.java.net/~briangoetz/amber/datum.html
+3. [Happens before order](https://docs.oracle.com/javase/specs/jls/se16/html/jls-17.html#jls-17.4.5)
