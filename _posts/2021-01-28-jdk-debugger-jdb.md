@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Debugging Java app when you don't have access to IDE"
+title:      "Debugging Java app without IDE"
 subtitle:   "JDK command line debugger jdb"
 date:       2021-02-01 00:00:00
 author:     "Vipin Sharma"
@@ -11,24 +11,24 @@ tags: [OpenJDK, tools]
 
 ***This is draft post, work in progress:***
 
-###
+### Hard to replicate bugs
 
-For Java applications typical production/test machines are linux servers without display managers, only command line tools are available.
-Some bugs are hard to replicate on desktop but easily replicated on production/test machine, it is a common situation for professional Java developers. To debug such problems JDK provides 2 tools, remote debugging and `jdb`. Remote debugging is useful, but debugging this very slow experience.
-`jdb` is command line debugger as part of JDK, we can use this for inspection or debugging Java application.
+Some bugs are hard to replicate on desktop but easily replicated on production or test machine, it is a common situation professional Java developers deal with. To debug such problems JDK provides 2 tools, `remote debugging` and `jdb`. Remote debugging is useful, but it is very slow experience.
+
+For Java applications typical production/test machines are linux servers without display managers, only command line tools are available. `jdb` is command line debugger as part of JDK, we can use this for inspection or debugging Java application.
 
 <!-- Using `jdb` we can connect both local or remote JVM for inspection or debugging.-->
 
 <!--Professional java developers use some IDE for debugging/troubleshooting applications. Intellij Idea, Eclipse and NetBeans are some popular IDEs. Do you know JDK also provides command line debugger `jdb`?
 
-If you don't have access to any professional IDE, and you have access to JDK, you can use jdb.
+If you don't have access to any professional IDE, you can use jdb.
 The jdb command line utility is included in the JDK. -->
-
-jdb is available in jdk/bin directory. It uses the Java Debug Interface (JDI) to launch or connect to the target JVM. The Java Debug Interface (JDI) provides a Java programming language interface for debugging Java programming language applications. JDI is a part of the [Java Platform Debugger Architecture](https://docs.oracle.com/en/java/javase/15/docs/specs/jpda/architecture.html).
 
 <br>
 
 ### Troubleshoot java application with the jdb Utility
+
+jdb is available in jdk/bin directory. It uses the Java Debug Interface (JDI) to launch or connect to the target JVM. The Java Debug Interface (JDI) provides a Java programming language interface for debugging Java programming language applications. JDI is a part of the [Java Platform Debugger Architecture](https://docs.oracle.com/en/java/javase/15/docs/specs/jpda/architecture.html).
 
 This section we will see how to attach jdb to java application and start debugging and monitoring.
 
@@ -47,7 +47,7 @@ This is format of the jdb command:
 
 #### Java program we will be debugging in this post
 
-Following is sample class we are going to debug and try to understand different features available. It is important to compile this class with -g option (javac -g Test.java) in order to see local variables while debugging.
+Following is sample class we are going to debug and try to understand different features available. It is important to compile this class with -g option (javac -g Test.java). -g option generates all debugging information, including local variables. By default, only line number and source file information is generated.
 
 ```java
 public class Test
@@ -87,11 +87,13 @@ To attach jdb with this remote jvm use below syntax:
 
     jdb -attach 5005
 
+For this post we will not see remote debugging in detail.
+
 <br>
 
 #### debugging and monitoring
 
-For this post we are not using remote debugging, using following command to attach with jvm:
+Following is the command to attach jdb with jvm:
 
     /jdk/bin/jdb Test
     Initializing jdb ...
@@ -104,7 +106,7 @@ Setting a break point at line number 5 using `stop`:
 
 Start execution of application's main class using `run`:
 
-    > run Test
+    > run
     run  Test
     Set uncaught java.lang.Throwable
     Set deferred uncaught java.lang.Throwable
@@ -130,15 +132,25 @@ execute current line using `step`:
     > Second Line of main function
     
     Step completed: "thread=main", Test.main(), line=7 bci=16
-    7            System.out.println("Thrid Line of main function");
+    7            System.out.println("Third Line of main function");
 
-execute current line using `step`:, this is also an example of messed up console print by 2 threads.
+execute current line using `step`:
+
+<!--
+this is an example of messed up console print by 2 threads:
 
     main[1] step
     > Third Line of main fu
     nStep completed: ction
     "thread=main", Test.main(), line=9 bci=24
     9    		int i=0;
+-->
+    main[1] step
+    > Third Line of main function
+
+    Step completed: "thread=main", Test.main(), line=9 bci=24
+    9    		int i=0;
+
 
 execute current line using `step`:
 
@@ -184,13 +196,129 @@ continue execution from the breakpoint using `cont`:
     > i: 0
     i: 2
 
+All available commands in jdb using `help`:
+
+    main[1] help
+    ** command list **
+    connectors                -- list available connectors and transports in this VM
+    
+    run [class [args]]        -- start execution of application's main class
+    
+    threads [threadgroup]     -- list threads
+    thread <thread id>        -- set default thread
+    suspend [thread id(s)]    -- suspend threads (default: all)
+    resume [thread id(s)]     -- resume threads (default: all)
+    where [<thread id> | all] -- dump a thread's stack
+    wherei [<thread id> | all]-- dump a thread's stack, with pc info
+    up [n frames]             -- move up a thread's stack
+    down [n frames]           -- move down a thread's stack
+    kill <thread id> <expr>   -- kill a thread with the given exception object
+    interrupt <thread id>     -- interrupt a thread
+    
+    print <expr>              -- print value of expression
+    dump <expr>               -- print all object information
+    eval <expr>               -- evaluate expression (same as print)
+    set <lvalue> = <expr>     -- assign new value to field/variable/array element
+    locals                    -- print all local variables in current stack frame
+    
+    classes                   -- list currently known classes
+    class <class id>          -- show details of named class
+    methods <class id>        -- list a class's methods
+    fields <class id>         -- list a class's fields
+    
+    threadgroups              -- list threadgroups
+    threadgroup <name>        -- set current threadgroup
+    
+    stop [go|thread] [<thread_id>] <at|in> <location>
+    -- set a breakpoint
+    -- if no options are given, the current list of breakpoints is printed
+    -- if "go" is specified, immediately resume after stopping
+    -- if "thread" is specified, only suspend the thread we stop in
+    -- if neither "go" nor "thread" are specified, suspend all threads
+    -- if an integer <thread_id> is specified, only stop in the specified thread
+    -- "at" and "in" have the same meaning
+    -- <location> can either be a line number or a method:
+    --   <class_id>:<line_number>
+    --   <class_id>.<method>[(argument_type,...)]
+    clear <class id>.<method>[(argument_type,...)]
+    -- clear a breakpoint in a method
+    clear <class id>:<line>   -- clear a breakpoint at a line
+    clear                     -- list breakpoints
+    catch [uncaught|caught|all] <class id>|<class pattern>
+    -- break when specified exception occurs
+    ignore [uncaught|caught|all] <class id>|<class pattern>
+    -- cancel 'catch' for the specified exception
+    watch [access|all] <class id>.<field name>
+    -- watch access/modifications to a field
+    unwatch [access|all] <class id>.<field name>
+    -- discontinue watching access/modifications to a field
+    trace [go] methods [thread]
+    -- trace method entries and exits.
+    -- All threads are suspended unless 'go' is specified
+    trace [go] method exit | exits [thread]
+    -- trace the current method's exit, or all methods' exits
+    -- All threads are suspended unless 'go' is specified
+    untrace [methods]         -- stop tracing method entrys and/or exits
+    step                      -- execute current line
+    step up                   -- execute until the current method returns to its caller
+    stepi                     -- execute current instruction
+    next                      -- step one line (step OVER calls)
+    cont                      -- continue execution from breakpoint
+    
+    list [line number|method] -- print source code
+    use (or sourcepath) [source file path]
+    -- display or change the source path
+    exclude [<class pattern>, ... | "none"]
+    -- do not report step or method events for specified classes
+    classpath                 -- print classpath info from target VM
+    
+    monitor <command>         -- execute command each time the program stops
+    monitor                   -- list monitors
+    unmonitor <monitor#>      -- delete a monitor
+    read <filename>           -- read and execute a command file
+    
+    lock <expr>               -- print lock info for an object
+    threadlocks [thread id]   -- print lock info for a thread
+    
+    pop                       -- pop the stack through and including the current frame
+    reenter                   -- same as pop, but current frame is reentered
+    redefine <class id> <class file name>
+    -- redefine the code for a class
+    
+    disablegc <expr>          -- prevent garbage collection of an object
+    enablegc <expr>           -- permit garbage collection of an object
+    
+    !!                        -- repeat last command
+    <n> <command>             -- repeat command n times
+    # <command>               -- discard (no-op)
+    help (or ?)               -- list commands
+    dbgtrace [flag]           -- same as dbgtrace command line option
+    version                   -- print version information
+    exit (or quit)            -- exit debugger
+    
+    <class id>: a full class name with package qualifiers
+    <class pattern>: a class name with a leading or trailing wildcard ('*')
+    <thread id>: thread number as reported in the 'threads' command
+    <expr>: a Java(TM) Programming Language expression.
+    Most common syntax is supported.
+    
+    Startup commands can be placed in either "jdb.ini" or ".jdbrc"
+    in user.home or user.dir
+
 coming out of jdb:
 
     quit
-
+<!--
+JDB: to add similar on blog post
+https://stackoverflow.com/questions/20018866/specifying-sourcepath-in-jdb-what-am-i-doing-wrong
+-->
 
 ### Conclusion
 
-Knowing features like this helps you get the best java jobs, that's why to help you I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/). Download this step by step guide for free!
+Knowing features like this helps you get the best java jobs, that's why to help you I wrote ebook [5 steps to Best Java Jobs](https://jfeatures.com/). Download this step-by-step guide for free!
 
 [<img src="../img/ebook_upd.png" width="200" height="200">](https://jfeatures.com/)
+
+Resources:
+
+1. [javac](https://docs.oracle.com/en/java/javase/16/docs/specs/man/javac.html)
