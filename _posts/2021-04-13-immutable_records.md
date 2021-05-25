@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Avoid multithreading bugs with immutable Java Records"
+title:      "Avoid multithreading bugs using immutable Java Records"
 subtitle:   "This post focuses on immutable feature of Record classes"
 date:       2021-04-13 12:00:00
 author:     "Vipin Sharma"
