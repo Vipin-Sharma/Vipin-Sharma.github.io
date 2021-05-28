@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Debugging Java app without IDE"
-subtitle:   "JDK command line debugger jdb"
+subtitle:   "Command line debugger part of JDK: jdb"
 date:       2021-02-01 00:00:00
 author:     "Vipin Sharma"
 header-img: "img/posts/blog-post-bg2.jpeg"
@@ -11,9 +11,10 @@ tags: [OpenJDK, tools]
 
 ***This is draft post, work in progress:***
 
-### Hard to replicate bugs
+<!--### Hard to replicate bugs-->
 
-Some bugs are hard to replicate on desktop but easily replicated on production or test machine, it is a common situation professional Java developers deal with. To debug such problems JDK provides 2 tools, `remote debugging` and `jdb`. Remote debugging is useful, but it is very slow experience.
+Some bugs are hard to replicate on personal computer but easily replicated on production or test machine, it is a common situation professional Java developers deal with. To debug such problems JDK provides 2 tools, `remote debugging` and `jdb`. This post we will focus on `jdb`.
+<!--Remote debugging is useful, but it is very slow experience.-->
 
 For Java applications typical production/test machines are linux servers without display managers, only command line tools are available. `jdb` is command line debugger as part of JDK, we can use this for inspection or debugging Java application.
 
